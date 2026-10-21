@@ -2,291 +2,319 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Academy ON — 사라진 20분</title>
-<meta name="description" content="학원과 학원 사이, 아무도 모르는 20분. 아무 일 없으면 아무 알림도 없는 안심 출결, Academy ON 베타 시사회 초대.">
+<meta name="description" content="학원이 몇 곳이든 아이 출결은 앱 하나로. 학원 사이 도착이 늦을 때만 알려드리는 안심 출결, Academy ON 베타 시사회 초대.">
 <meta property="og:title" content="Academy ON — 사라진 20분">
-<meta property="og:description" content="러닝타임 3분. 학원과 학원 사이를 지키는 이야기. 베타 시사회 가정을 모집합니다.">
+<meta property="og:description" content="학원과 학원 사이, 아무도 모르는 20분. 대전·충청권 베타 시사회 가정을 모집합니다.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#0B0D12">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&display=swap">
 <style>
 :root{
   --night:#0B0D12; --night-2:#141821; --night-3:#1C2230;
   --paper:#F6F1E8; --ink:#141821;
   --text:#ECE7DD; --mute:#9AA0AC;
-  --on:#2BD48A; --on-dim:rgba(43,212,138,.14);
-  --amber:#FFB547; --amber-dim:rgba(255,181,71,.14);
-  --red:#FF5D5D;
+  --on:#2BD48A; --on-ink:#0E7A4E; --on-dim:rgba(43,212,138,.14);
+  --amber:#FFB547; --red:#FF5D5D;
   --serif:"Nanum Myeongjo",serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--night);color:var(--text);line-height:1.65;word-break:keep-all;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
+button{font:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-.narrow{max-width:760px}
+.narrow{max-width:720px}
+section{position:relative;padding:112px 0}
 
-body:before{content:"";position:fixed;inset:-50%;z-index:100;pointer-events:none;opacity:.06;
+/* film grain */
+body:before{content:"";position:fixed;inset:-50%;z-index:100;pointer-events:none;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation:grain 1s steps(4) infinite}
 @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s}
-nav.solid{background:rgba(11,13,18,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.solid{background:rgba(11,13,18,.86);backdrop-filter:blur(12px);border-color:rgba(255,255,255,.06)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
 .logo{font-weight:900;font-size:18px;text-decoration:none;display:flex;align-items:center;gap:8px;letter-spacing:-.02em}
 .logo b{color:var(--on)}
 .rec{width:9px;height:9px;border-radius:50%;background:var(--on);box-shadow:0 0 12px var(--on);animation:blink 2s infinite}
 @keyframes blink{50%{opacity:.35}}
-.ticket{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:14px;color:var(--night);background:var(--on);padding:9px 16px;border-radius:999px}
+.nav-r{display:flex;align-items:center;gap:16px}
+.nav-link{font-size:14px;font-weight:700;color:var(--mute);text-decoration:none}
+.nav-link:hover{color:var(--text)}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:999px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;font-weight:800;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s,background .2s;min-height:48px}
 .btn:active{transform:scale(.97)}
-.btn-on{background:var(--on);color:var(--night);padding:16px 30px;font-size:17px}
+.btn-on{background:var(--on);color:var(--night);padding:14px 28px;font-size:17px}
 .btn-on:hover{box-shadow:0 0 0 8px var(--on-dim)}
+.btn-line{background:transparent;color:var(--text);padding:13px 24px;font-size:16px;border:1.5px solid rgba(255,255,255,.22)}
+.btn-line:hover{border-color:var(--text)}
+.btn-sm{padding:8px 16px;font-size:14px;min-height:38px}
 
-.rv{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
 .rv.in{opacity:1;transform:none}
-.d1{transition-delay:.15s}.d2{transition-delay:.3s}.d3{transition-delay:.45s}.d4{transition-delay:.6s}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
 
-.scene{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13px;letter-spacing:.18em;color:var(--mute);display:flex;align-items:center;gap:12px;margin-bottom:22px}
-.scene:before{content:"";width:28px;height:1px;background:var(--mute)}
-h2.big{font-size:clamp(30px,5vw,52px);font-weight:900;line-height:1.25;letter-spacing:-.03em;margin-bottom:22px}
+/* type */
+.scene{font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:var(--mute);display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.scene:before{content:"";width:28px;height:1px;background:currentColor}
+h2.big{font-size:clamp(28px,4.8vw,50px);font-weight:900;line-height:1.25;letter-spacing:-.03em;margin-bottom:18px}
 .lead{font-size:18px;color:var(--mute);max-width:620px}
 .hl{color:var(--on)}
 .am{color:var(--amber)}
-section{position:relative;padding:120px 0}
 .center{text-align:center}
 .center .scene{justify-content:center}
-.center .lead{margin:0 auto}
+.center .lead{margin-left:auto;margin-right:auto}
 
-/* OPENING */
-.opening{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px 80px;overflow:hidden;position:relative}
-.opening:before,.opening:after{content:"";position:absolute;left:0;right:0;height:9vh;background:#000;z-index:2}
-.opening:before{top:0}.opening:after{bottom:0}
-.beam{position:absolute;top:-20%;left:50%;width:140vw;height:140%;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 0%,rgba(43,212,138,.16),transparent 55%);pointer-events:none}
-.op-inner{position:relative;z-index:3}
-.rating{display:inline-flex;gap:10px;align-items:center;font-size:13px;color:var(--mute);border:1px solid rgba(255,255,255,.15);padding:6px 14px;border-radius:999px;margin-bottom:34px}
-.rating i{font-style:normal;font-weight:900;color:var(--night);background:var(--on);width:26px;height:22px;border-radius:11px;display:grid;place-items:center;font-size:10px}
-.presents{font-size:14px;letter-spacing:.4em;color:var(--mute);margin-bottom:18px}
-.opening h1{font-family:var(--serif);font-size:clamp(54px,12vw,140px);font-weight:800;line-height:1.05;letter-spacing:-.04em}
-.opening h1 span{display:block;font-size:.32em;letter-spacing:.02em;color:var(--mute);margin-top:18px;font-family:"Pretendard Variable",Pretendard,sans-serif;font-weight:500}
-.opening .tag{margin:34px auto 44px;font-size:clamp(17px,2.4vw,21px);max-width:560px}
-.scroll-cue{position:absolute;bottom:12vh;left:50%;transform:translateX(-50%);font-size:12px;letter-spacing:.3em;color:var(--mute);z-index:3}
-.scroll-cue:after{content:"";display:block;width:1px;height:38px;background:linear-gradient(var(--mute),transparent);margin:10px auto 0;animation:drop 1.8s infinite}
-@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-.title-in{animation:titleIn 2.2s cubic-bezier(.2,.7,.2,1) both}
+/* ===== HERO ===== */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:96px 20px 72px;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;left:0;right:0;height:7vh;background:#000;z-index:2}
+.hero:before{top:0}.hero:after{bottom:0}
+.beam{position:absolute;top:-20%;left:50%;width:140vw;height:140%;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 0%,rgba(43,212,138,.17),transparent 55%);pointer-events:none}
+.hero-in{position:relative;z-index:3;max-width:760px}
+.rating{display:inline-flex;gap:10px;align-items:center;font-size:13px;color:var(--mute);border:1px solid rgba(255,255,255,.15);padding:6px 14px;border-radius:999px;margin-bottom:26px}
+.rating i{font-style:normal;font-weight:900;color:var(--night);background:var(--on);height:20px;padding:0 7px;border-radius:10px;display:grid;place-items:center;font-size:10px}
+.hero h1{font-family:var(--serif);font-size:clamp(56px,12vw,132px);font-weight:800;line-height:1.05;letter-spacing:-.04em;animation:titleIn 2s cubic-bezier(.2,.7,.2,1) both}
 @keyframes titleIn{from{opacity:0;filter:blur(12px)}to{opacity:1;filter:none}}
+.hero .value{margin:22px auto 30px;font-size:clamp(18px,2.6vw,23px);font-weight:600;line-height:1.55;max-width:600px}
+.hero .value span{color:var(--mute);font-weight:500}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-top:26px;font-size:14px;color:var(--mute)}
+.trust span:before{content:"✓ ";color:var(--on);font-weight:900}
+.who-link{display:inline-block;margin-top:18px;font-size:14px;color:var(--mute);text-decoration:underline;text-underline-offset:4px;background:none;border:0;cursor:pointer}
+.who-link:hover{color:var(--text)}
 
-/* SCENE 1 */
-.s1 .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.meeting{background:var(--night-2);border:1px solid rgba(255,255,255,.07);border-radius:24px;padding:28px}
-.slide-mock{background:var(--night-3);border-radius:14px;padding:22px;margin-bottom:18px}
-.slide-mock .bar{height:10px;border-radius:5px;background:rgba(255,255,255,.08);margin-bottom:10px}
-.slide-mock .w6{width:60%}.slide-mock .w8{width:80%}.slide-mock .w4{width:40%;background:var(--on-dim)}
-.toast{display:flex;gap:12px;align-items:flex-start;background:#fff;color:var(--ink);border-radius:16px;padding:14px 16px;box-shadow:0 18px 40px rgba(0,0,0,.45);font-size:14px;transform:translateY(16px);opacity:0;transition:all .6s cubic-bezier(.2,.8,.2,1)}
+/* ===== STORY ===== */
+.story .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.meeting{background:var(--night-2);border:1px solid rgba(255,255,255,.07);border-radius:24px;padding:26px}
+.slide-mock{background:var(--night-3);border-radius:14px;padding:20px;margin-bottom:16px}
+.slide-mock i{display:block;height:9px;border-radius:5px;background:rgba(255,255,255,.08);margin-bottom:9px}
+.slide-mock i:nth-child(1){width:80%}.slide-mock i:nth-child(2){width:60%}.slide-mock i:nth-child(3){width:40%;background:var(--on-dim)}
+.toast{display:flex;gap:12px;align-items:flex-start;background:#fff;color:var(--ink);border-radius:16px;padding:13px 15px;box-shadow:0 18px 40px rgba(0,0,0,.45);font-size:14px;transform:translateY(14px);opacity:0;transition:all .6s cubic-bezier(.2,.8,.2,1)}
 .toast.in{transform:none;opacity:1}
 .toast .app{flex:none;width:34px;height:34px;border-radius:9px;background:#FEE500;display:grid;place-items:center;font-weight:900;font-size:11px}
 .toast small{display:block;color:#666;font-size:12px}
-.quote{font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:800;line-height:1.5;margin:26px 0 18px}
+.quote{font-family:var(--serif);font-size:clamp(21px,2.8vw,28px);font-weight:800;line-height:1.5;margin:18px 0 12px}
 .caption{color:var(--mute);font-size:16px}
 
-/* SCENE 2 */
-.s2{background:radial-gradient(ellipse at 50% 40%,rgba(255,93,93,.08),transparent 60%)}
-.clock{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:clamp(64px,15vw,168px);font-weight:700;letter-spacing:-.04em;line-height:1;margin:18px 0 10px;font-variant-numeric:tabular-nums;transition:color .4s}
+.gap{margin-top:80px;text-align:center}
+.gap h3{font-size:clamp(22px,3.4vw,34px);font-weight:900;letter-spacing:-.02em}
+.clock{font-family:var(--mono);font-size:clamp(64px,14vw,156px);font-weight:700;letter-spacing:-.04em;line-height:1;margin:14px 0 6px;font-variant-numeric:tabular-nums;transition:color .4s}
 .clock.alarm{color:var(--red);text-shadow:0 0 40px rgba(255,93,93,.35)}
-.gapbar{max-width:640px;height:8px;border-radius:4px;background:rgba(255,255,255,.08);margin:26px auto 10px;overflow:hidden}
+.gapbar{max-width:620px;height:8px;border-radius:4px;background:rgba(255,255,255,.08);margin:22px auto 10px;overflow:hidden}
 .gapbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--red));border-radius:4px}
-.gaplabels{max-width:640px;margin:0 auto;display:flex;justify-content:space-between;font-size:13px;color:var(--mute)}
-.s2 .lead{margin-top:28px}
-.who{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:760px;margin:56px auto 0}
-.who div{background:var(--night-2);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:22px 16px}
-.who b{display:block;font-size:30px;margin-bottom:6px}
-.who span{font-size:15px;color:var(--mute)}
-.who strong{display:block;font-size:16px;margin-bottom:2px}
+.gaplabels{max-width:620px;margin:0 auto;display:flex;justify-content:space-between;font-size:13px;color:var(--mute)}
+.gap .lead{margin:26px auto 0}
+.ng{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:860px;margin:40px auto 0;text-align:left}
+.ng div{background:var(--night-2);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:18px 18px 16px;position:relative}
+.ng b{display:block;font-size:16px;margin-bottom:4px}
+.ng span{font-size:14px;color:var(--mute)}
+.ng em{position:absolute;top:14px;right:14px;font-style:normal;font-size:11px;font-weight:800;color:var(--red);border:1.5px solid var(--red);border-radius:6px;padding:1px 7px;transform:rotate(8deg)}
 
-/* SCENE 3 */
-.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
-.choice{background:var(--night-2);border:1px solid rgba(255,255,255,.07);border-radius:22px;padding:26px 22px;position:relative}
-.choice .no{position:absolute;top:18px;right:18px;font-size:12px;font-weight:800;color:var(--red);border:1.5px solid var(--red);border-radius:6px;padding:2px 8px;transform:rotate(8deg)}
-.choice h3{font-size:19px;font-weight:800;margin:10px 0 8px}
-.choice p{color:var(--mute);font-size:15px}
-.choice .bubble{margin-top:16px;background:var(--night-3);border-radius:14px 14px 14px 4px;padding:10px 14px;font-size:14px;display:inline-block}
-.choice .num{font-family:ui-monospace,monospace;color:var(--mute);font-size:13px}
-
-/* TWIST */
+/* ===== TWIST ===== */
 .twist{background:linear-gradient(180deg,var(--night),#06231A 45%,var(--night))}
 .twist .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-.flash{font-size:14px;letter-spacing:.3em;color:var(--on);font-weight:800;margin-bottom:18px}
-.twist h2{font-family:var(--serif);font-size:clamp(34px,5.4vw,60px);font-weight:800;line-height:1.3;letter-spacing:-.03em;margin-bottom:24px}
+.flash{font-size:14px;letter-spacing:.3em;color:var(--on);font-weight:800;margin-bottom:16px}
+.twist h2{font-family:var(--serif);font-size:clamp(34px,5.2vw,58px);font-weight:800;line-height:1.3;letter-spacing:-.03em;margin-bottom:20px}
+.how{list-style:none;margin:24px 0 0;display:grid;gap:10px}
+.how li{display:flex;gap:12px;align-items:flex-start;font-size:16px}
+.how li b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--on);color:var(--night);display:grid;place-items:center;font-size:13px;margin-top:1px}
+.punch{margin-top:26px;padding:20px 22px;border-left:3px solid var(--on);background:var(--on-dim);border-radius:0 16px 16px 0;font-size:18px;font-weight:700}
 .phone{background:#0F1218;border:1px solid rgba(255,255,255,.1);border-radius:36px;padding:22px 18px;max-width:360px;width:100%;margin-left:auto;box-shadow:0 30px 80px rgba(43,212,138,.12)}
-.phone-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding:0 4px}
+.phone-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding:0 4px}
 .phone-top strong{font-size:16px}
 .phone-top span{font-size:12px;color:var(--mute)}
-.ev{display:flex;gap:12px;padding:12px;border-radius:14px;margin-bottom:8px;background:var(--night-2);opacity:.2;transform:translateX(12px);transition:all .6s ease}
+.ev{display:flex;gap:12px;padding:11px 12px;border-radius:14px;margin-bottom:8px;background:var(--night-2);opacity:.2;transform:translateX(12px);transition:all .6s ease}
 .ev.show{opacity:1;transform:none}
-.ev .t{font-family:ui-monospace,monospace;font-size:12px;color:var(--mute);min-width:42px;padding-top:2px}
+.ev .t{font-family:var(--mono);font-size:12px;color:var(--mute);min-width:40px;padding-top:2px}
 .ev p{font-size:14px;font-weight:600}
 .ev small{display:block;font-weight:400;color:var(--mute);font-size:12px}
 .ev.ok{border-left:3px solid var(--on)}
 .ev.check{border-left:3px solid var(--amber)}
 .ev.silent{border:1px dashed rgba(43,212,138,.5);background:var(--on-dim)}
 .ev.silent p{color:var(--on)}
-.punch{margin-top:30px;padding:22px 24px;border-left:3px solid var(--on);background:var(--on-dim);border-radius:0 16px 16px 0;font-size:18px;font-weight:700}
 
-/* WHY */
-.points{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:48px}
-.pt{background:var(--paper);color:var(--ink);border-radius:24px;padding:30px 28px;position:relative}
-.pt .n{font-family:var(--serif);font-size:44px;font-weight:800;color:#D9D1C2;line-height:1;position:absolute;top:22px;right:26px}
-.pt .k{display:inline-block;font-size:12px;font-weight:800;color:#0E7A4E;background:#DDF3E8;padding:4px 10px;border-radius:999px;margin-bottom:14px}
-.pt h3{font-size:22px;font-weight:900;letter-spacing:-.02em;margin-bottom:10px;line-height:1.35;padding-right:44px}
+/* ===== WHY ===== */
+.points{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+.pt{background:var(--paper);color:var(--ink);border-radius:24px;padding:28px 26px;position:relative}
+.pt .n{font-family:var(--serif);font-size:40px;font-weight:800;color:#D9D1C2;line-height:1;position:absolute;top:22px;right:24px}
+.pt .k{display:inline-block;font-size:12px;font-weight:800;color:var(--on-ink);background:#DDF3E8;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+.pt h3{font-size:21px;font-weight:900;letter-spacing:-.02em;margin-bottom:8px;line-height:1.35;padding-right:44px}
 .pt p{color:#555B66;font-size:15.5px}
 .pt.wide{grid-column:1/-1;background:var(--on)}
 .pt.wide .k{background:rgba(0,0,0,.12);color:var(--ink)}
 .pt.wide p{color:#11392A}
 .pt.wide .n{color:rgba(0,0,0,.14)}
+.swipe-hint{display:none}
 
-/* CALC */
-.calc{background:var(--night-2);border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:40px 36px;margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.ctrl{margin-bottom:26px}
+/* ===== CALC ===== */
+.calc{background:var(--night-2);border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:38px 34px;margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.ctrl{margin-bottom:24px}
 .ctrl:last-child{margin-bottom:0}
-.ctrl label,.ctrl .lbl{display:flex;justify-content:space-between;font-weight:700;font-size:15px;margin-bottom:10px}
-.ctrl output{color:var(--on);font-family:ui-monospace,monospace}
-input[type=range]{width:100%;accent-color:var(--on);height:28px}
+.ctrl .lbl,.ctrl label{display:flex;justify-content:space-between;font-weight:700;font-size:15px;margin-bottom:10px}
+.ctrl output{color:var(--on);font-family:var(--mono)}
+input[type=range]{width:100%;accent-color:var(--on);height:30px}
 .seg{display:flex;gap:8px}
-.seg button{flex:1;border:1.5px solid rgba(255,255,255,.15);background:transparent;color:var(--text);font:inherit;font-weight:700;padding:11px 0;border-radius:12px;cursor:pointer}
+.seg button{flex:1;border:1.5px solid rgba(255,255,255,.15);background:transparent;color:var(--text);font-weight:700;padding:11px 0;border-radius:12px;cursor:pointer;min-height:44px}
 .seg button[aria-pressed="true"]{background:var(--on);border-color:var(--on);color:var(--night)}
 .result{text-align:center}
 .result .lab{font-size:14px;color:var(--mute);margin-bottom:6px}
-.result .num{font-family:ui-monospace,monospace;font-size:clamp(48px,7vw,80px);font-weight:700;color:var(--amber);line-height:1.05;font-variant-numeric:tabular-nums}
-.result .unit{font-size:15px;color:var(--mute);margin-top:6px}
-.result .movie{margin-top:22px;font-size:17px}
+.result .num{font-family:var(--mono);font-size:clamp(48px,7vw,78px);font-weight:700;color:var(--amber);line-height:1.05;font-variant-numeric:tabular-nums}
+.result .unit{font-size:14px;color:var(--mute);margin-top:4px}
+.result .movie{margin-top:18px;font-size:17px}
 .result .movie b{color:var(--on)}
-.reels{display:flex;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap;min-height:30px;font-size:24px}
-.foot{margin-top:16px;font-size:13px;color:var(--mute)}
+.reels{margin-top:8px;min-height:30px;font-size:22px;letter-spacing:4px}
+.result .btn{margin-top:20px}
+.foot{margin-top:14px;font-size:13px;color:var(--mute)}
 
-/* MISSION */
+/* ===== MISSION ===== */
 .mission{background:var(--paper);color:var(--ink)}
-.mission .scene{color:#7A7F89}.mission .scene:before{background:#7A7F89}
-.manifesto{font-family:var(--serif);font-size:clamp(28px,4.6vw,48px);font-weight:800;line-height:1.45;letter-spacing:-.02em;margin:10px 0 44px}
+.mission .scene{color:#7A7F89}
+.manifesto{font-family:var(--serif);font-size:clamp(26px,4.4vw,46px);font-weight:800;line-height:1.45;letter-spacing:-.02em;margin:6px 0 40px}
 .manifesto em{font-style:normal;background:linear-gradient(transparent 62%,#BDEFD6 62%)}
-.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.goal{background:#fff;border-radius:22px;padding:28px 24px;border:1px solid #E6DFD2}
-.goal .ic{font-size:30px;margin-bottom:12px}
-.goal h3{font-size:19px;font-weight:900;margin-bottom:8px}
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.goal{background:#fff;border-radius:22px;padding:26px 22px;border:1px solid #E6DFD2}
+.goal .ic{font-size:28px;margin-bottom:10px}
+.goal h3{font-size:18px;font-weight:900;margin-bottom:6px}
 .goal p{font-size:15px;color:#555B66}
-.road{margin-top:60px}
-.road h3.rt{font-size:22px;font-weight:900;margin-bottom:26px}
+.road{margin-top:52px}
+.road h3.rt{font-size:21px;font-weight:900;margin-bottom:24px}
 .road ol{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
 .road ol:before{content:"";position:absolute;top:13px;left:0;right:0;height:2px;background:#D9D1C2}
 .road li{position:relative;padding-top:40px;padding-right:16px}
-.road li:before{content:"";position:absolute;top:4px;left:0;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid #0E7A4E}
-.road li.now:before{background:#0E7A4E;box-shadow:0 0 0 6px #DDF3E8}
-.road .when{font-size:13px;font-weight:800;color:#0E7A4E}
+.road li:before{content:"";position:absolute;top:4px;left:0;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--on-ink)}
+.road li.now:before{background:var(--on-ink);box-shadow:0 0 0 6px #DDF3E8}
+.road .when{font-size:13px;font-weight:800;color:var(--on-ink)}
 .road b{display:block;font-size:17px;margin:2px 0 4px}
 .road span{font-size:14px;color:#555B66}
 
-/* PROMISE */
-.promise{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
-.promise span{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:10px 18px;font-size:15px;font-weight:600}
-.promise span b{color:var(--on);margin-right:6px}
-
-/* COOKIE */
-.cookie{background:var(--night-2)}
-.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
-.lv{background:var(--night);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:26px 22px}
+/* ===== ACADEMY ===== */
+.academy{background:var(--night-2)}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.lv{background:var(--night);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:24px 22px}
 .lv .tag{display:inline-block;font-size:12px;font-weight:800;color:var(--night);background:var(--on);padding:4px 10px;border-radius:999px;margin-bottom:12px}
-.lv h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.lv h3{font-size:19px;font-weight:800;margin-bottom:6px}
 .lv p{font-size:15px;color:var(--mute)}
-.lv .gain{margin-top:12px;font-size:14px;color:var(--text)}
+.lv .gain{margin-top:10px;font-size:14px;color:var(--text)}
 .lv .gain b{color:var(--on)}
+.academy .cta-row{justify-content:flex-start;margin-top:30px}
 
-/* INVITE */
+/* ===== INVITE ===== */
 .invite{background:radial-gradient(ellipse at 50% 0%,rgba(43,212,138,.12),transparent 60%)}
-.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:36px 0 34px}
-.perk{border:1px dashed rgba(43,212,138,.5);border-radius:18px;padding:20px;text-align:center}
-.perk b{display:block;font-size:26px;color:var(--on);font-weight:900;margin-bottom:4px}
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:32px 0 30px}
+.perk{border:1px dashed rgba(43,212,138,.5);border-radius:18px;padding:18px 12px;text-align:center}
+.perk b{display:block;font-size:24px;color:var(--on);font-weight:900;margin-bottom:2px}
 .perk span{font-size:14px;color:var(--mute)}
-.ticket-card{background:var(--paper);color:var(--ink);border-radius:26px;position:relative;overflow:hidden;text-align:left}
-.ticket-card:before,.ticket-card:after{content:"";position:absolute;top:118px;width:28px;height:28px;border-radius:50%;background:var(--night)}
-.ticket-card:before{left:-14px}.ticket-card:after{right:-14px}
-.ticket-head{padding:28px 30px 26px;border-bottom:2px dashed #D9D1C2;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;min-height:132px}
-.ticket-head h3{font-family:var(--serif);font-size:26px;font-weight:800;line-height:1.3}
-.ticket-head small{font-family:ui-monospace,monospace;font-size:12px;color:#7A7F89;display:block;margin-bottom:6px;letter-spacing:.1em}
-.admit{font-family:ui-monospace,monospace;font-weight:700;font-size:13px;border:2px solid var(--ink);border-radius:8px;padding:6px 10px;transform:rotate(-6deg);white-space:nowrap}
-.tabs{display:flex;gap:6px;background:#EAE3D6;padding:5px;border-radius:999px;margin:24px 30px 0}
-.tabs button{flex:1;border:0;background:transparent;font:inherit;font-weight:800;font-size:15px;padding:11px;border-radius:999px;cursor:pointer;color:#666}
-.tabs button[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.08)}
-form{padding:26px 30px 32px}
-.field{margin-bottom:22px}
+.ticket{background:var(--paper);color:var(--ink);border-radius:26px;position:relative;overflow:hidden;text-align:left}
+.ticket-head{padding:26px 28px 22px;border-bottom:2px dashed #D9D1C2;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.ticket-head h3{font-family:var(--serif);font-size:25px;font-weight:800;line-height:1.3}
+.ticket-head small{font-family:var(--mono);font-size:11.5px;color:#7A7F89;display:block;margin-bottom:6px;letter-spacing:.1em}
+.admit{font-family:var(--mono);font-weight:700;font-size:13px;border:2px solid var(--ink);border-radius:8px;padding:6px 10px;transform:rotate(-6deg);white-space:nowrap}
+.steps-ind{display:flex;gap:6px;padding:18px 28px 0}
+.steps-ind i{flex:1;height:4px;border-radius:2px;background:#E2DACB}
+.steps-ind i.on{background:var(--on-ink)}
+.pane{padding:22px 28px 30px}
+.pane[hidden]{display:none}
+.role{display:flex;gap:6px;background:#EAE3D6;padding:5px;border-radius:999px;margin-bottom:22px}
+.role button{flex:1;border:0;background:transparent;font-weight:800;font-size:15px;padding:10px;border-radius:999px;cursor:pointer;color:#666;min-height:44px}
+.role button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.field{margin-bottom:20px}
 .field>label,.field legend{display:block;font-weight:800;font-size:15px;margin-bottom:9px}
 fieldset{border:0}
 .req{color:#D9822B}
-input[type=text],select,textarea{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid #DDD5C7;border-radius:12px;background:#fff;color:var(--ink)}
-input:focus,select:focus,textarea:focus{outline:none;border-color:#0E7A4E;box-shadow:0 0 0 3px #DDF3E8}
+input[type=text],input[type=tel],select,textarea{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid #DDD5C7;border-radius:12px;background:#fff;color:var(--ink);min-height:50px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--on-ink);box-shadow:0 0 0 3px #DDF3E8}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips label{position:relative;cursor:pointer}
 .chips input{position:absolute;opacity:0;pointer-events:none}
-.chips span{display:inline-block;padding:9px 15px;border:1.5px solid #DDD5C7;border-radius:999px;font-size:15px;font-weight:600;background:#fff;transition:all .12s}
+.chips span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1.5px solid #DDD5C7;border-radius:999px;font-size:15px;font-weight:600;background:#fff;transition:all .12s}
 .chips input:checked+span{background:var(--ink);border-color:var(--ink);color:#fff}
 .chips input:focus-visible+span{box-shadow:0 0 0 3px #BDEFD6}
-.opt{font-weight:500;color:#7A7F89;font-size:13px}
-.consent{background:#EFE9DE;border-radius:12px;padding:15px;font-size:13px;color:#555B66;margin-bottom:14px}
-.consent strong{color:var(--ink)}
-.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:700;margin-bottom:22px;cursor:pointer}
-.check input{width:20px;height:20px;margin-top:2px;accent-color:#0E7A4E;flex:none}
-form .btn-on{width:100%;padding:17px}
-.msg{display:none;margin-top:14px;padding:14px 16px;border-radius:12px;font-size:15px;font-weight:700}
-.msg.ok{display:block;background:#DDF3E8;color:#0E5A3A}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin-bottom:18px;cursor:pointer;color:#444}
+.consent input{width:20px;height:20px;margin-top:2px;accent-color:var(--on-ink);flex:none}
+.consent details{margin-top:4px;font-size:12.5px;color:#7A7F89}
+.consent summary{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.pane .btn-on{width:100%}
+.msg{display:none;margin-top:12px;padding:13px 15px;border-radius:12px;font-size:14.5px;font-weight:700}
 .msg.err{display:block;background:#FCEBD6;color:#7A4A0E}
 .hp{position:absolute;left:-9999px}
+.stamp{display:flex;align-items:center;gap:14px;background:#DDF3E8;border-radius:16px;padding:16px 18px;margin-bottom:22px}
+.stamp b{white-space:nowrap;font-family:var(--mono);font-size:22px;color:var(--on-ink)}
+.stamp p{font-size:15px;font-weight:700}
+.stamp small{display:block;font-weight:500;color:#555B66;font-size:13px}
+.q-card h4{font-size:20px;font-weight:900;margin-bottom:6px;letter-spacing:-.02em}
+.q-card .q-sub{font-size:14px;color:#7A7F89;margin-bottom:16px}
+.q-meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#7A7F89;margin-bottom:12px;font-family:var(--mono)}
+.q-nav{display:flex;gap:10px;margin-top:22px}
+.q-nav .btn{flex:1}
+.btn-ghost-ink{background:transparent;color:#555B66;border:1.5px solid #DDD5C7;padding:12px 18px;font-size:15px}
+.done{text-align:center}
+.done .big-ic{font-size:44px}
+.done h4{font-family:var(--serif);font-size:26px;font-weight:800;margin:8px 0 8px}
+.done p{color:#555B66;font-size:15.5px}
+.share{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.share .btn{width:100%}
+.btn-ink{background:var(--ink);color:#fff;padding:13px 18px;font-size:15px}
+.copied{font-size:13px;color:var(--on-ink);margin-top:10px;min-height:20px}
 
-/* FAQ */
-.faq-sec{padding-top:60px}
-details{border-bottom:1px solid rgba(255,255,255,.1);padding:20px 0}
-summary{font-weight:700;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
-summary::-webkit-details-marker{display:none}
-summary:after{content:"+";font-size:24px;line-height:1;color:var(--mute)}
-details[open] summary:after{content:"−"}
-details p{margin-top:10px;color:var(--mute);font-size:15.5px}
-.q{color:var(--on);margin-right:8px;font-family:ui-monospace,monospace}
+/* ===== FAQ ===== */
+details.qa{border-bottom:1px solid rgba(255,255,255,.1);padding:18px 0}
+details.qa summary{font-weight:700;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+details.qa summary::-webkit-details-marker{display:none}
+details.qa summary:after{content:"+";font-size:24px;line-height:1;color:var(--mute)}
+details.qa[open] summary:after{content:"−"}
+details.qa p{margin-top:10px;color:var(--mute);font-size:15.5px}
+.q{color:var(--on);margin-right:8px;font-family:var(--mono)}
 
-/* CREDITS */
-.credits{text-align:center;padding:140px 0 120px;background:#000}
-.roll{display:grid;gap:30px}
-.roll dt{font-size:12px;letter-spacing:.3em;color:var(--mute);margin-bottom:6px}
-.roll dd{font-size:20px;font-weight:700}
-.fin{font-family:var(--serif);font-size:clamp(34px,6vw,56px);font-weight:800;margin:70px 0 30px}
-.credits .note{font-size:13px;color:#5E6470;max-width:520px;margin:34px auto 0}
+/* ===== CREDITS ===== */
+.credits{text-align:center;padding:110px 0 120px;background:#000}
+.roll{display:grid;gap:24px}
+.roll dt{font-size:12px;letter-spacing:.3em;color:var(--mute);margin-bottom:4px}
+.roll dd{font-size:19px;font-weight:700}
+.fin{font-family:var(--serif);font-size:clamp(30px,5.6vw,52px);font-weight:800;margin:56px 0 26px}
+.credits .note{font-size:13px;color:#5E6470;max-width:520px;margin:30px auto 0}
 
 .mcta{display:none}
-@media (max-height:820px){.scroll-cue{display:none}}
 
 @media (max-width:860px){
-  section{padding:88px 0}
-  .s1 .grid,.twist .grid,.calc{grid-template-columns:1fr;gap:36px}
+  section{padding:80px 0}
+  .story .grid,.twist .grid,.calc{grid-template-columns:1fr;gap:32px}
   .phone{margin:0 auto}
-  .choices,.goals,.levels,.perks,.points,.who{grid-template-columns:1fr}
-  .road ol{grid-template-columns:1fr 1fr;row-gap:28px}
+  .goals,.levels,.perks,.ng{grid-template-columns:1fr}
+  .perks{grid-template-columns:repeat(3,1fr);gap:8px}
+  .perk{padding:14px 6px}.perk b{font-size:19px}.perk span{font-size:12px}
+  .points{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:32px -20px 0;padding:0 20px 8px;scrollbar-width:none}
+  .points::-webkit-scrollbar{display:none}
+  .pt{flex:0 0 84%;scroll-snap-align:center}
+  .pt.wide{flex-basis:84%}
+  .swipe-hint{display:block;font-size:13px;color:var(--mute);margin-top:8px}
+  .road ol{grid-template-columns:1fr 1fr;row-gap:26px}
   .road ol:before{display:none}
-  .calc{padding:30px 22px}
-  .ticket-head{padding:24px 22px;min-height:0}
-  .ticket-card:before,.ticket-card:after{display:none}
-  .tabs{margin:20px 22px 0}
-  form{padding:22px 22px 28px}
+  .calc{padding:28px 20px}
+  .ticket-head{padding:22px 20px 18px}
+  .steps-ind{padding:16px 20px 0}
+  .pane{padding:20px 20px 26px}
+  .nav-link{display:none}
   .nav-cta{display:none}
   .scene{letter-spacing:.08em;font-size:12px}
-  .mcta{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:60;transform:translateY(120px);transition:transform .35s}
+  .gap{margin-top:64px}
+  .mcta{display:flex;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:60;transform:translateY(130px);transition:transform .35s}
   .mcta.on{transform:none}
-  .mcta a{width:100%;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .mcta a{width:100%;box-shadow:0 10px 30px rgba(0,0,0,.55)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   body:before{animation:none}
   .rv,.toast,.ev{opacity:1!important;transform:none!important;transition:none!important}
-  .title-in,.rec,.scroll-cue:after{animation:none}
+  .hero h1,.rec{animation:none}
 }
 </style>
 </head>
@@ -295,76 +323,72 @@ details p{margin-top:10px;color:var(--mute);font-size:15.5px}
 <nav id="nav">
   <div class="wrap">
     <a href="#top" class="logo"><span class="rec"></span>Academy <b>ON</b></a>
-    <a href="#invite" class="ticket nav-cta">🎟 시사회 초대장 받기</a>
+    <div class="nav-r">
+      <a href="#academy" class="nav-link">원장님이신가요?</a>
+      <a href="#invite" class="btn btn-on btn-sm nav-cta" data-role="parent">🎟 초대장 받기</a>
+    </div>
   </div>
 </nav>
 
-<!-- OPENING -->
-<header class="opening" id="top">
+<!-- HERO : 3초 안에 무엇을, 누구에게, 왜 -->
+<header class="hero" id="top">
   <div class="beam"></div>
-  <div class="op-inner">
-    <div class="rating rv"><i>ALL</i>전체관람가 · 러닝타임 3분</div>
-    <p class="presents rv d1">ACADEMY ON PRESENTS</p>
-    <h1 class="title-in">사라진 20분<span>학원과 학원 사이, 아무도 모르는 시간</span></h1>
-    <p class="tag rv d3">평일 오후 4시 52분. 피아노 학원 문이 닫힙니다.<br>다음 학원까지는 걸어서 15분. 그 사이, 누가 아이를 보고 있을까요?</p>
-    <div class="rv d4"><a href="#scene1" class="btn btn-on">▶ 상영 시작</a></div>
+  <div class="hero-in">
+    <div class="rating"><i>ALL</i>베타 시사회 · 대전·충청권</div>
+    <h1>사라진 20분</h1>
+    <p class="value" id="hero-value">학원이 몇 곳이든, 아이 출결은 앱 하나로.<br><span>학원 사이 도착이 늦을 때만 조용히 알려드려요.</span></p>
+    <div class="cta-row">
+      <a href="#invite" class="btn btn-on" id="hero-cta" data-role="parent">🎟 무료 초대장 받기</a>
+      <a href="#story" class="btn btn-line">▶ 1분 예고편</a>
+    </div>
+    <div class="trust"><span>위치 추적 없음</span><span>문제 있을 때만 알림</span><span>학원은 가입 없이 참여</span></div>
+    <a href="#academy" class="who-link" id="hero-switch">학원 원장님이신가요? 원장님 편 보기 →</a>
   </div>
-  <div class="scroll-cue">SCROLL</div>
 </header>
 
-<!-- SCENE 1 -->
-<section class="s1" id="scene1">
-  <div class="wrap grid">
-    <div>
-      <div class="scene rv">SCENE 01 · 오후 4:52 · 회의실</div>
-      <h2 class="big rv d1">엄마는 지금<br><span class="am">분기 보고</span> 중입니다</h2>
-      <p class="quote rv d2">"다음 장 넘겨 주세요."</p>
-      <p class="caption rv d3">테이블 아래로 휴대폰이 짧게 울립니다. 피아노 학원 문자예요.<br>지우(11살)가 방금 나왔답니다. 다음은 5시 10분 수학학원.</p>
-    </div>
-    <div class="meeting rv d2" aria-hidden="true">
-      <div class="slide-mock"><div class="bar w8"></div><div class="bar w6"></div><div class="bar w4"></div><div class="bar w6"></div></div>
-      <div class="toast" id="toast1"><div class="app">문자</div><div><b>[○○피아노] 지우 학생 하원</b><small>16:52 · 오늘도 즐거운 수업이었어요</small></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SCENE 2 -->
-<section class="s2 center" id="scene2">
+<!-- STORY : 공감 → 긴장 -->
+<section class="story" id="story">
   <div class="wrap">
-    <div class="scene rv">SCENE 02 · 사라진 20분</div>
-    <h2 class="big rv d1">그리고, 아무 소식이 없습니다</h2>
-    <div class="clock" id="clock">16:52</div>
-    <div class="gapbar"><i id="gapfill"></i></div>
-    <div class="gaplabels"><span>피아노 퇴실 16:52</span><span>수학 시작 17:10</span></div>
-    <p class="lead rv d2">수학학원은 원래 알림을 안 보내는 곳이에요.<br>'아직 가는 중'일까요, '무슨 일'일까요? <b style="color:var(--text)">아무도 모릅니다.</b></p>
-    <div class="who">
-      <div class="rv"><b>👩‍💼</b><strong>엄마</strong><span>회의 중. 전화 못 함</span></div>
-      <div class="rv d1"><b>👨‍🏫</b><strong>수학 선생님</strong><span>앞 반 수업 중. 확인 못 함</span></div>
-      <div class="rv d2"><b>🧒</b><strong>지우</strong><span>편의점 앞… 일까요?</span></div>
+    <div class="grid">
+      <div>
+        <div class="scene rv">SCENE 01 · 오후 4:52 · 회의실</div>
+        <h2 class="big rv d1">엄마는 지금<br><span class="am">분기 보고</span> 중입니다</h2>
+        <p class="quote rv d2">"다음 장 넘겨 주세요."</p>
+        <p class="caption rv d3">테이블 아래로 휴대폰이 짧게 울립니다. 지우(11살)가 피아노 학원을 나왔대요.<br>다음은 5시 10분 수학학원. 걸어서 15분.</p>
+      </div>
+      <div class="meeting rv d2" aria-hidden="true">
+        <div class="slide-mock"><i></i><i></i><i></i></div>
+        <div class="toast" id="toast1"><div class="app">문자</div><div><b>[○○피아노] 지우 학생 하원</b><small>16:52 · 오늘도 즐거운 수업이었어요</small></div></div>
+      </div>
+    </div>
+
+    <div class="gap">
+      <div class="scene rv" style="justify-content:center">SCENE 02 · 사라진 20분</div>
+      <h3 class="rv d1">그리고, 아무 소식이 없습니다</h3>
+      <div class="clock" id="clock">16:52</div>
+      <div class="gapbar"><i id="gapfill"></i></div>
+      <div class="gaplabels"><span>피아노 퇴실 16:52</span><span>수학 시작 17:10</span></div>
+      <p class="lead rv">수학학원은 원래 알림을 안 보내는 곳이에요. 가는 중일까요, 무슨 일일까요? <b style="color:var(--text)">지금은 아무도 모릅니다.</b></p>
+      <div class="ng">
+        <div class="rv"><em>NG</em><b>회의 중 몰래 전화</b><span>선생님은 수업 중이라 못 받아요</span></div>
+        <div class="rv d1"><em>NG</em><b>알림 앱 세 개 뒤지기</b><span>수학학원 기록은 어디에도 없어요</span></div>
+        <div class="rv d2"><em>NG</em><b>위치 추적 앱 켜기</b><span>"엄마, 나 감시해?"</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SCENE 3 -->
-<section id="scene3">
-  <div class="wrap">
-    <div class="scene rv">SCENE 03 · 엄마의 선택지</div>
-    <h2 class="big rv d1">지금 엄마가 할 수 있는 건,<br>셋 다 별로입니다</h2>
-    <div class="choices">
-      <div class="choice rv"><span class="no">NG</span><span class="num">선택지 A</span><h3>회의 중에 몰래 전화</h3><p>선생님은 수업 중이라 못 받고, 상사는 눈치를 줍니다.</p><span class="bubble">"잠시만요… 죄송합니다"</span></div>
-      <div class="choice rv d1"><span class="no">NG</span><span class="num">선택지 B</span><h3>알림 앱 세 개 뒤지기</h3><p>문자, 카카오톡, 학원 앱. 정작 수학학원 기록은 어디에도 없습니다.</p><span class="bubble">"이게 어느 앱이었더라…"</span></div>
-      <div class="choice rv d2"><span class="no">NG</span><span class="num">선택지 C</span><h3>위치 추적 앱 켜기</h3><p>안심은 잠깐. 사춘기 문턱의 아이에게는 감시로 느껴집니다.</p><span class="bubble">"엄마, 나 감시해?"</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- TWIST -->
+<!-- TWIST : 해결 -->
 <section class="twist" id="twist">
   <div class="wrap grid">
     <div>
       <div class="flash rv">✦ 반전</div>
       <h2 class="rv d1">같은 날,<br><span class="hl">Academy ON</span>이<br>있었다면</h2>
-      <p class="lead rv d2">지우는 수학학원 입구 스티커에 휴대폰을 1초 터치하면 됩니다. 늦어지면 엄마보다 학원에 먼저 물어봅니다.</p>
+      <ol class="how rv d2">
+        <li><b>1</b><span>지우가 학원 입구 스티커에 휴대폰을 <strong class="hl">1초</strong> 터치</span></li>
+        <li><b>2</b><span>평소보다 늦으면, 엄마보다 <strong class="hl">학원에 먼저</strong> 확인</span></li>
+        <li><b>3</b><span>확인이 안 될 때만 엄마에게 알림</span></li>
+      </ol>
       <p class="punch rv d3">아무 일 없으면, 아무 알림도 없습니다.<br>엄마는 회의를 끝까지 마칩니다.</p>
     </div>
     <div class="phone" role="figure" aria-label="Academy ON 부모 앱 예시 화면">
@@ -379,23 +403,24 @@ details p{margin-top:10px;color:var(--mute);font-size:15.5px}
   </div>
 </section>
 
-<!-- WHY -->
+<!-- WHY : 구매 포인트 -->
 <section id="why">
   <div class="wrap">
-    <div class="scene rv">관람 포인트 · 부모님이 Academy ON을 고르는 이유</div>
-    <h2 class="big rv d1">이 영화, <span class="hl">이래서</span> 봅니다</h2>
+    <div class="scene rv">관람 포인트</div>
+    <h2 class="big rv d1">부모님들이 <span class="hl">이래서</span> 고릅니다</h2>
     <div class="points">
-      <div class="pt wide rv"><span class="n">01</span><span class="k">유일한 기능</span><h3>학원과 학원 '사이'를 지키는 출결 서비스</h3><p>기존 출결앱은 학원 안까지만 책임집니다. 이동 중 도착하지 않으면 알려주는 것, 그 20분이 Academy ON을 만든 이유입니다.</p></div>
-      <div class="pt rv"><span class="n">02</span><span class="k">시간</span><h3>"잘 들어갔나요?" 전화, 이제 안 해도 됩니다</h3><p>확인은 학원에 먼저, 알림은 문제 있을 때만. 회의도, 운전도, 퇴근길도 끊기지 않습니다.</p></div>
-      <div class="pt rv d1"><span class="n">03</span><span class="k">편리함</span><h3>학원이 세 곳이어도 앱은 하나</h3><p>문자, 카카오톡, 학원 앱에 흩어진 출결이 아이 이름 하나로 모입니다. 하루가 한 줄로 보입니다.</p></div>
-      <div class="pt rv"><span class="n">04</span><span class="k">관계</span><h3>감시가 아니라 안심. 아이와 싸울 일이 없습니다</h3><p>위치를 쫓지 않고 '들어갔다, 나왔다'만 남깁니다. 아이가 먼저 터치하는 출석 습관이 됩니다.</p></div>
-      <div class="pt rv d1"><span class="n">05</span><span class="k">현실성</span><h3>학원을 설득할 필요가 없습니다</h3><p>학원이 가입하지 않아도 문자 버튼 하나로 확인됩니다. 원하면 입구에 스티커 한 장이면 끝.</p></div>
+      <div class="pt wide rv"><span class="n">01</span><span class="k">학원 '사이'까지</span><h3>학원 안이 아니라, 학원과 학원 사이를 챙깁니다</h3><p>지금의 출결앱은 학원마다 따로, 그 학원 안의 출결만 알려줍니다. Academy ON은 아이 기준으로 하루를 이어 보고, 다음 학원에 늦으면 먼저 확인합니다.</p></div>
+      <div class="pt rv"><span class="n">02</span><span class="k">시간</span><h3>"잘 들어갔나요?" 전화가 사라집니다</h3><p>확인은 학원에 먼저, 알림은 문제 있을 때만. 회의도 운전도 끊기지 않습니다.</p></div>
+      <div class="pt rv d1"><span class="n">03</span><span class="k">편리함</span><h3>학원이 세 곳이어도 앱은 하나</h3><p>문자, 카카오톡, 학원 앱에 흩어진 출결이 아이 이름 하나로 모입니다.</p></div>
+      <div class="pt rv"><span class="n">04</span><span class="k">관계</span><h3>감시가 아니라 안심이라 아이와 싸울 일이 없습니다</h3><p>위치는 보지 않고 '들어갔다, 나왔다'만 남깁니다.</p></div>
+      <div class="pt rv d1"><span class="n">05</span><span class="k">현실성</span><h3>학원을 설득하지 않아도 시작됩니다</h3><p>학원이 가입하지 않아도 문자 버튼 하나로 도착을 확인합니다.</p></div>
     </div>
+    <p class="swipe-hint">← 옆으로 넘겨 보세요 →</p>
   </div>
 </section>
 
-<!-- CALC -->
-<section id="calc" style="padding-top:40px">
+<!-- CALC : 내 문제로 만들기 -->
+<section id="calc" style="padding-top:24px">
   <div class="wrap">
     <div class="scene rv">인터미션 · 직접 계산해 보세요</div>
     <h2 class="big rv d1">우리 아이의 '사라진 시간'은<br>한 달에 얼마나 될까요?</h2>
@@ -425,181 +450,128 @@ details p{margin-top:10px;color:var(--mute);font-size:15.5px}
         <p class="unit">시간 : 분</p>
         <p class="movie" id="calc-movie">영화 <b>5.4편</b>을 볼 수 있는 시간이에요</p>
         <div class="reels" id="reels" aria-hidden="true"></div>
+        <a href="#invite" class="btn btn-on" data-role="parent">이 시간을 지켜 주세요 →</a>
       </div>
     </div>
-    <p class="foot">학교에서 첫 학원, 학원에서 다음 학원으로 가는 이동을 학원 수만큼 계산했어요. 한 달은 4.3주, 영화 한 편은 2시간 기준입니다.</p>
+    <p class="foot">학교→첫 학원, 학원→다음 학원 이동을 학원 수만큼 계산했어요. 한 달 4.3주, 영화 한 편 2시간 기준.</p>
   </div>
 </section>
 
-<!-- MISSION -->
+<!-- MISSION : 목적과 목표 -->
 <section class="mission" id="mission">
   <div class="wrap">
-    <div class="scene rv">제작 의도 · Academy ON이 존재하는 이유</div>
+    <div class="scene rv">제작 의도</div>
     <p class="manifesto rv d1">우리의 목적은 하나입니다.<br><em>학원과 학원 사이의 20분</em>을<br>더 이상 아무도 모르는 시간으로 두지 않는 것.</p>
     <div class="goals">
-      <div class="goal rv"><div class="ic">🛡</div><h3>아이에게는, 안전한 이동</h3><p>도착하지 않은 순간을 가장 먼저 알아차리는 동네 안전망을 만듭니다.</p></div>
-      <div class="goal rv d1"><div class="ic">☕</div><h3>부모에게는, 끊기지 않는 하루</h3><p>확인 전화와 앱 뒤지기를 없애고, 필요할 때만 알려드립니다.</p></div>
-      <div class="goal rv d2"><div class="ic">🏫</div><h3>학원에게는, 줄어든 전화</h3><p>스티커 한 장으로 문의 전화를 줄이고, 승하차 기록으로 보호·감독을 증명합니다.</p></div>
+      <div class="goal rv"><div class="ic">🛡</div><h3>아이에게는, 안전한 이동</h3><p>도착하지 않은 순간을 가장 먼저 알아차리는 동네 안전망.</p></div>
+      <div class="goal rv d1"><div class="ic">☕</div><h3>부모에게는, 끊기지 않는 하루</h3><p>확인 전화와 앱 뒤지기 없이, 필요할 때만 알림.</p></div>
+      <div class="goal rv d2"><div class="ic">🏫</div><h3>학원에게는, 줄어든 전화</h3><p>스티커 한 장으로 문의 전화를 줄이고, 승하차 기록으로 보호·감독을 증명.</p></div>
     </div>
     <div class="road">
       <h3 class="rt rv">개봉 일정</h3>
       <ol>
-        <li class="now rv"><span class="when">지금</span><b>베타 시사회</b><span>대전·충청권 참여 가정과 학원 모집</span></li>
-        <li class="rv d1"><span class="when">1~3개월</span><b>첫 상영</b><span>테스트 가정 10곳, 스티커 부착 학원과 시험 운영</span></li>
-        <li class="rv d2"><span class="when">4~6개월</span><b>1호 상영관</b><span>학원가 한 곳 집중 · 학원 10곳, 가정 200곳</span></li>
+        <li class="now rv"><span class="when">지금</span><b>베타 시사회</b><span>참여 가정·학원 모집</span></li>
+        <li class="rv d1"><span class="when">1~3개월</span><b>첫 상영</b><span>테스트 가정 10곳과 시험 운영</span></li>
+        <li class="rv d2"><span class="when">4~6개월</span><b>1호 상영관</b><span>학원가 한 곳 · 학원 10곳, 가정 200곳</span></li>
         <li class="rv d3"><span class="when">7~12개월</span><b>확대 개봉</b><span>학원 30곳, 가정 1,000곳 · 저학년 키링 태그</span></li>
       </ol>
     </div>
   </div>
 </section>
 
-<!-- PROMISE -->
-<section id="promise" style="padding:100px 0 80px">
-  <div class="wrap">
-    <div class="scene rv">관람 수칙 · Academy ON의 약속</div>
-    <h2 class="big rv d1">아이의 위치가 아니라,<br>"잘 들어갔는지"만 봅니다</h2>
-    <div class="promise rv d2">
-      <span><b>✓</b>GPS 위치 추적 안 함</span>
-      <span><b>✓</b>문제 있을 때만 알림</span>
-      <span><b>✓</b>기록은 언제든 조회</span>
-      <span><b>✓</b>어떤 출결앱을 쓰는 학원이든 연결</span>
-      <span><b>✓</b>14세 미만은 보호자 동의 후 이용</span>
-      <span><b>✓</b>위조 방지 NFC로 가짜 출석 차단</span>
-    </div>
-  </div>
-</section>
-
-<!-- COOKIE -->
-<section class="cookie" id="cookie">
+<!-- ACADEMY : 원장님 진입점 -->
+<section class="academy" id="academy">
   <div class="wrap">
     <div class="scene rv">🍪 쿠키 영상 · 원장님 편</div>
-    <h2 class="big rv d1">원장님, 가입 안 하셔도<br>주인공이 되실 수 있어요</h2>
+    <h2 class="big rv d1">원장님, 가입 안 하셔도<br>함께하실 수 있어요</h2>
     <p class="lead rv d2">참여 수준은 원장님이 고르세요. 어느 단계든 비용은 없습니다.</p>
     <div class="levels">
-      <div class="lv rv"><span class="tag">Lv.0 그대로 계세요</span><h3>문자 버튼 하나</h3><p>아이가 늦으면 문자가 옵니다. "도착/미도착" 중 하나만 누르세요. 설치·가입 필요 없음.</p><p class="gain"><b>얻는 것</b> · 수업 중 걸려오는 확인 전화가 줄어요</p></div>
-      <div class="lv rv d1"><span class="tag">Lv.1 스티커 한 장</span><h3>입구에 붙이기만</h3><p>입구와 차량에 NFC 스티커를 붙이면, 아이 터치로 입실·승차가 기록됩니다.</p><p class="gain"><b>얻는 것</b> · "안심 연결 학원" 배지와 승하차 기록</p></div>
-      <div class="lv rv d2"><span class="tag">Lv.2 정식 가입</span><h3>자동 출결 관리</h3><p>공기계나 선생님 폰으로 태그를 인식하고 관리자 화면을 씁니다.</p><p class="gain"><b>얻는 것</b> · 출결·통학을 한 화면에서, 보호·감독 기록까지</p></div>
+      <div class="lv rv"><span class="tag">Lv.0 그대로 계세요</span><h3>문자 버튼 하나</h3><p>아이가 늦으면 문자가 옵니다. "도착/미도착"만 누르세요. 설치·가입 없음.</p><p class="gain"><b>얻는 것</b> · 수업 중 확인 전화 감소</p></div>
+      <div class="lv rv d1"><span class="tag">Lv.1 스티커 한 장</span><h3>입구에 붙이기만</h3><p>입구와 차량에 NFC 스티커를 붙이면 아이 터치로 입실·승차가 기록됩니다.</p><p class="gain"><b>얻는 것</b> · "안심 연결 학원" 배지, 승하차 기록</p></div>
+      <div class="lv rv d2"><span class="tag">Lv.2 정식 가입</span><h3>자동 출결 관리</h3><p>공기계나 선생님 폰으로 태그를 인식하고 관리자 화면을 씁니다.</p><p class="gain"><b>얻는 것</b> · 출결·통학을 한 화면에서</p></div>
     </div>
+    <div class="cta-row rv"><a href="#invite" class="btn btn-on" data-role="academy">🎟 원장님 참여 신청</a></div>
   </div>
 </section>
 
-<!-- INVITE -->
+<!-- INVITE : 2단계 신청 + 공유 -->
 <section class="invite center" id="invite">
   <div class="wrap narrow">
     <div class="scene rv">INVITATION · 베타 시사회</div>
     <h2 class="big rv d1">1호 상영관,<br>먼저 입장하세요</h2>
-    <p class="lead rv d2">대전·충청권 시범 운영에 함께할 가정과 학원을 모십니다.<br>1분이면 초대장이 발급됩니다.</p>
+    <p class="lead rv d2">연락처만 남기시면 초대장이 발급돼요. 30초면 충분합니다.</p>
     <div class="perks">
-      <div class="perk rv"><b>무료</b><span>베타 기간 이용료</span></div>
-      <div class="perk rv d1"><b>200</b><span>1호 상영관 초대 가정</span></div>
-      <div class="perk rv d2"><b>1순위</b><span>우리 동네 학원 연결 요청</span></div>
+      <div class="perk rv"><b>무료</b><span>베타 이용료</span></div>
+      <div class="perk rv d1"><b>200</b><span>모집 가정</span></div>
+      <div class="perk rv d2"><b>먼저</b><span>우리 동네 개봉</span></div>
     </div>
 
-    <div class="ticket-card rv">
+    <div class="ticket rv" id="ticket">
       <div class="ticket-head">
-        <div><small>ACADEMY ON · BETA PREMIERE · DAEJEON</small><h3>사라진 20분<br>시사회 초대장</h3></div>
-        <span class="admit">ADMIT ONE</span>
+        <div><small>ACADEMY ON · BETA PREMIERE</small><h3>사라진 20분<br>시사회 초대장</h3></div>
+        <span class="admit" id="admit">ADMIT ONE</span>
       </div>
-      <div class="tabs" role="tablist">
-        <button type="button" role="tab" id="tab-parent" aria-selected="true" aria-controls="form-parent">학부모</button>
-        <button type="button" role="tab" id="tab-academy" aria-selected="false" aria-controls="form-academy">학원 원장·선생님</button>
-      </div>
+      <div class="steps-ind" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
 
-      <form id="form-parent" data-type="parent" role="tabpanel" aria-labelledby="tab-parent" novalidate>
+      <!-- STEP 1 : 최소 정보 -->
+      <form class="pane" id="step1" novalidate>
         <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="field"><fieldset><legend>아이의 학년 <span class="req">*</span></legend><div class="chips">
-          <label><input type="radio" name="grade" value="초1-2" required><span>초1~2</span></label>
-          <label><input type="radio" name="grade" value="초3-4"><span>초3~4</span></label>
-          <label><input type="radio" name="grade" value="초5-6"><span>초5~6</span></label>
-          <label><input type="radio" name="grade" value="미취학"><span>미취학</span></label>
-          <label><input type="radio" name="grade" value="중학생"><span>중학생</span></label>
-        </div></fieldset></div>
-        <div class="field"><fieldset><legend>평일에 다니는 학원 수 <span class="req">*</span></legend><div class="chips">
-          <label><input type="radio" name="academies" value="1" required><span>1곳</span></label>
+        <div class="role" role="group" aria-label="신청 대상">
+          <button type="button" data-role="parent" aria-pressed="true">학부모</button>
+          <button type="button" data-role="academy" aria-pressed="false">학원 원장·선생님</button>
+        </div>
+        <div class="field" id="f-academies"><fieldset><legend>평일에 아이가 다니는 학원 수 <span class="req">*</span></legend><div class="chips">
+          <label><input type="radio" name="academies" value="1"><span>1곳</span></label>
           <label><input type="radio" name="academies" value="2"><span>2곳</span></label>
           <label><input type="radio" name="academies" value="3"><span>3곳</span></label>
           <label><input type="radio" name="academies" value="4+"><span>4곳 이상</span></label>
         </div></fieldset></div>
-        <div class="field"><fieldset><legend>아이 휴대폰 <span class="req">*</span></legend><div class="chips">
-          <label><input type="radio" name="phone" value="스마트폰" required><span>스마트폰</span></label>
-          <label><input type="radio" name="phone" value="키즈폰"><span>키즈폰</span></label>
-          <label><input type="radio" name="phone" value="없음"><span>없음</span></label>
-        </div></fieldset></div>
-        <div class="field"><fieldset><legend>가장 공감한 장면은? <span class="opt">(복수 선택)</span></legend><div class="chips">
-          <label><input type="checkbox" name="pain" value="회의 중 확인 전화"><span>회의 중 확인 전화</span></label>
-          <label><input type="checkbox" name="pain" value="알림 앱 여러 개"><span>알림 앱 여러 개</span></label>
-          <label><input type="checkbox" name="pain" value="알림 없는 학원"><span>알림 없는 학원</span></label>
-          <label><input type="checkbox" name="pain" value="위치 앱 갈등"><span>위치 앱으로 아이와 갈등</span></label>
-          <label><input type="checkbox" name="pain" value="학원 사이 이동"><span>학원 사이 이동이 불안</span></label>
-        </div></fieldset></div>
-        <div class="field"><fieldset><legend>정식 출시 후, 월 얼마까지 괜찮으세요? <span class="req">*</span></legend><div class="chips">
-          <label><input type="radio" name="price" value="무료만" required><span>무료라면</span></label>
-          <label><input type="radio" name="price" value="~2000"><span>2,000원까지</span></label>
-          <label><input type="radio" name="price" value="~3000"><span>3,000원까지</span></label>
-          <label><input type="radio" name="price" value="~5000"><span>5,000원까지</span></label>
-          <label><input type="radio" name="price" value="5000+"><span>그 이상도 OK</span></label>
-        </div></fieldset></div>
-        <div class="field"><label for="p-region">사는 지역 <span class="req">*</span></label>
-          <select id="p-region" name="region" required><option value="">선택해 주세요</option><option>대전 유성구</option><option>대전 서구</option><option>대전 중구</option><option>대전 동구</option><option>대전 대덕구</option><option>세종</option><option>충북</option><option>충남</option><option>그 외 지역</option></select></div>
-        <div class="field"><label for="p-contact">초대장 받을 휴대폰 번호 또는 이메일 <span class="req">*</span></label>
-          <input id="p-contact" name="contact" type="text" inputmode="email" autocomplete="email" placeholder="010-0000-0000 또는 name@email.com" required></div>
-        <label class="check"><input type="checkbox" name="pilot" value="예"><span>시범 운영에 직접 참여할게요 (아이가 다니는 학원 연결 포함)</span></label>
-        <div class="consent"><strong>개인정보 수집·이용 안내</strong><br>수집 항목: 연락처, 지역, 설문 응답 · 목적: 베타 안내와 서비스 설계 · 보관: 베타 종료 후 6개월 이내 파기. 아이의 이름·사진은 받지 않습니다. 동의하지 않으시면 신청이 어렵습니다.</div>
-        <label class="check"><input type="checkbox" name="consent" value="동의" required><span>개인정보 수집·이용에 동의합니다 <span class="req">*</span></span></label>
-        <button type="submit" class="btn btn-on">🎟 초대장 받기</button>
-        <div class="msg" role="status" aria-live="polite"></div>
+        <div class="field"><label for="region" id="region-label">사는 지역 <span class="req">*</span></label>
+          <select id="region" name="region" required><option value="">선택해 주세요</option><option>대전 유성구</option><option>대전 서구</option><option>대전 중구</option><option>대전 동구</option><option>대전 대덕구</option><option>세종</option><option>충북</option><option>충남</option><option>그 외 지역</option></select></div>
+        <div class="field"><label for="contact">초대장 받을 휴대폰 번호 또는 이메일 <span class="req">*</span></label>
+          <input id="contact" name="contact" type="text" inputmode="email" autocomplete="tel" placeholder="010-0000-0000 또는 name@email.com" required></div>
+        <label class="consent"><input type="checkbox" name="consent" value="동의" required><span><b>개인정보 수집·이용에 동의합니다</b> <span class="req">*</span>
+          <details><summary>자세히 보기</summary>수집 항목: 연락처, 지역, 설문 응답 · 목적: 베타 안내와 서비스 설계 · 보관: 베타 종료 후 6개월 이내 파기. 아이의 이름·사진은 받지 않습니다. 동의하지 않으시면 신청이 어렵습니다.</details></span></label>
+        <button type="submit" class="btn btn-on" id="step1-btn">🎟 초대장 받기</button>
+        <div class="msg" role="alert"></div>
       </form>
 
-      <form id="form-academy" data-type="academy" role="tabpanel" aria-labelledby="tab-academy" hidden novalidate>
-        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="field"><fieldset><legend>학원 종류 <span class="req">*</span></legend><div class="chips">
-          <label><input type="radio" name="kind" value="태권도·체육관" required><span>태권도·체육관</span></label>
-          <label><input type="radio" name="kind" value="음악·미술"><span>음악·미술</span></label>
-          <label><input type="radio" name="kind" value="교과"><span>교과(국영수 등)</span></label>
-          <label><input type="radio" name="kind" value="기타"><span>기타</span></label>
-        </div></fieldset></div>
-        <div class="field"><fieldset><legend>초등 원생 수 <span class="req">*</span></legend><div class="chips">
-          <label><input type="radio" name="students" value="~30" required><span>30명 이하</span></label>
-          <label><input type="radio" name="students" value="31-60"><span>31~60명</span></label>
-          <label><input type="radio" name="students" value="61-100"><span>61~100명</span></label>
-          <label><input type="radio" name="students" value="100+"><span>100명 이상</span></label>
-        </div></fieldset></div>
-        <div class="field"><fieldset><legend>통학 차량 <span class="req">*</span></legend><div class="chips">
-          <label><input type="radio" name="vehicle" value="운행" required><span>운행함</span></label>
-          <label><input type="radio" name="vehicle" value="미운행"><span>운행 안 함</span></label>
-        </div></fieldset></div>
-        <div class="field"><fieldset><legend>참여해 볼 수 있는 단계 <span class="req">*</span></legend><div class="chips">
-          <label><input type="radio" name="level" value="Lv.0" required><span>Lv.0 문자 버튼</span></label>
-          <label><input type="radio" name="level" value="Lv.1"><span>Lv.1 스티커 부착</span></label>
-          <label><input type="radio" name="level" value="Lv.2"><span>Lv.2 정식 가입</span></label>
-          <label><input type="radio" name="level" value="미정"><span>설명 먼저 듣고 싶음</span></label>
-        </div></fieldset></div>
-        <div class="field"><label for="a-region">학원 지역 <span class="req">*</span></label>
-          <select id="a-region" name="region" required><option value="">선택해 주세요</option><option>대전 유성구</option><option>대전 서구</option><option>대전 중구</option><option>대전 동구</option><option>대전 대덕구</option><option>세종</option><option>충북</option><option>충남</option><option>그 외 지역</option></select></div>
-        <div class="field"><label for="a-contact">연락받을 휴대폰 번호 또는 이메일 <span class="req">*</span></label>
-          <input id="a-contact" name="contact" type="text" inputmode="email" placeholder="010-0000-0000 또는 name@email.com" required></div>
-        <div class="field"><label for="a-note">출결·통학 관리에서 가장 번거로운 점 <span class="opt">(선택)</span></label>
-          <textarea id="a-note" name="note" rows="3" placeholder="예) 수업 중에 확인 전화가 와요"></textarea></div>
-        <div class="consent"><strong>개인정보 수집·이용 안내</strong><br>수집 항목: 연락처, 학원 정보, 설문 응답 · 목적: 베타 안내와 서비스 설계 · 보관: 베타 종료 후 6개월 이내 파기.</div>
-        <label class="check"><input type="checkbox" name="consent" value="동의" required><span>개인정보 수집·이용에 동의합니다 <span class="req">*</span></span></label>
-        <button type="submit" class="btn btn-on">🎟 참여 신청하기</button>
-        <div class="msg" role="status" aria-live="polite"></div>
-      </form>
+      <!-- STEP 2 : 선택 설문 (한 화면에 한 질문) -->
+      <div class="pane" id="step2" hidden>
+        <div class="stamp"><b id="seat">A-00</b><p>초대장이 발급됐어요!<small>아래 질문은 선택이에요. 답해 주시면 서비스 설계에 바로 반영돼요.</small></p></div>
+        <div class="q-card" id="qcard" aria-live="polite"></div>
+        <div class="q-nav">
+          <button type="button" class="btn btn-ghost-ink" id="q-skip">건너뛰기</button>
+          <button type="button" class="btn btn-on" id="q-next">다음</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 : 완료 + 공유 -->
+      <div class="pane done" id="step3" hidden>
+        <div class="big-ic">🍿</div>
+        <h4>입장 준비 완료</h4>
+        <p id="done-text">1호 상영관이 열리면 가장 먼저 연락드릴게요.<br>같은 학원에 다니는 친구 부모님과 함께 오시면, 아이 학원이 더 빨리 연결돼요.</p>
+        <div class="share">
+          <button type="button" class="btn btn-ink" id="share-btn">친구 부모님께 공유</button>
+          <button type="button" class="btn btn-ghost-ink" id="copy-btn">링크 복사</button>
+        </div>
+        <p class="copied" id="copied" aria-live="polite"></p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq-sec" id="faq">
+<section id="faq" style="padding-top:40px">
   <div class="wrap narrow">
     <div class="scene rv">관객과의 대화</div>
-    <h2 class="big rv d1">GV에서 꼭 나오는 질문들</h2>
-    <details><summary><span><span class="q">Q.</span>아이 위치를 계속 따라다니나요?</span></summary><p>아니요. GPS 좌표는 수집하지 않습니다. 학원 입구 스티커에 터치한 입실·퇴실 기록만 남깁니다.</p></details>
-    <details><summary><span><span class="q">Q.</span>우리 아이 학원이 Academy ON을 안 쓰면요?</span></summary><p>괜찮습니다. 부모님이 등록한 시간표를 기준으로, 도착이 늦어지면 원장님께 문자 버튼으로 여쭤봅니다. 학원은 가입하지 않아도 됩니다.</p></details>
-    <details><summary><span><span class="q">Q.</span>휴대폰 없는 저학년은요?</span></summary><p>첫 상영은 휴대폰이 있는 초등 고학년부터 시작합니다. 저학년은 NFC 키링 태그를 학원 공기계나 차량 동승자 휴대폰에 터치하는 방식으로 이어서 개봉합니다.</p></details>
-    <details><summary><span><span class="q">Q.</span>아이가 터치를 깜빡하면 알림 폭탄 아닌가요?</span></summary><p>처음 2주는 알림 없이 기록만 쌓는 적응 기간입니다. 부모님께 알리기 전에 아이 휴대폰으로 먼저 "터치했니?"를 물어봅니다.</p></details>
-    <details><summary><span><span class="q">Q.</span>스티커를 친구가 대신 찍으면요?</span></summary><p>터치할 때마다 일회용 코드를 만드는 위조 방지 NFC 칩을 씁니다. 떼어 내면 훼손되는 스티커라 복제·이동도 어렵습니다.</p></details>
-    <details><summary><span><span class="q">Q.</span>얼마예요?</span></summary><p>베타 기간에는 무료입니다. 정식 가격은 시사회에 참여한 가정의 의견을 듣고 정합니다.</p></details>
+    <h2 class="big rv d1">자주 나오는 질문</h2>
+    <details class="qa"><summary><span><span class="q">Q.</span>아이 위치를 계속 따라다니나요?</span></summary><p>아니요. GPS 좌표는 수집하지 않습니다. 학원 입구 스티커에 터치한 입실·퇴실 기록만 남깁니다.</p></details>
+    <details class="qa"><summary><span><span class="q">Q.</span>우리 아이 학원이 Academy ON을 안 쓰면요?</span></summary><p>괜찮습니다. 부모님이 등록한 시간표를 기준으로, 도착이 늦어지면 원장님께 문자 버튼으로 여쭤봅니다. 학원은 가입하지 않아도 됩니다.</p></details>
+    <details class="qa"><summary><span><span class="q">Q.</span>휴대폰 없는 저학년은요?</span></summary><p>첫 상영은 휴대폰이 있는 초등 고학년부터 시작합니다. 저학년은 NFC 키링 태그를 학원 공기계나 차량 동승자 휴대폰에 터치하는 방식으로 이어서 개봉합니다.</p></details>
+    <details class="qa"><summary><span><span class="q">Q.</span>아이가 터치를 깜빡하면 알림 폭탄 아닌가요?</span></summary><p>처음 2주는 알림 없이 기록만 쌓는 적응 기간입니다. 부모님께 알리기 전에 아이 휴대폰으로 먼저 "터치했니?"를 물어봅니다.</p></details>
+    <details class="qa"><summary><span><span class="q">Q.</span>스티커를 친구가 대신 찍으면요?</span></summary><p>터치할 때마다 일회용 코드를 만드는 위조 방지 NFC 칩을 씁니다. 떼어 내면 훼손되는 스티커라 복제·이동도 어렵습니다.</p></details>
+    <details class="qa"><summary><span><span class="q">Q.</span>얼마예요?</span></summary><p>베타 기간에는 무료입니다. 정식 가격은 시사회에 참여한 가정의 의견을 듣고 정합니다.</p></details>
   </div>
 </section>
 
@@ -609,43 +581,44 @@ details p{margin-top:10px;color:var(--mute);font-size:15.5px}
     <dl class="roll">
       <div class="rv"><dt>주연</dt><dd>우리 아이</dd></div>
       <div class="rv"><dt>특별출연</dt><dd>회의 중인 엄마, 운전 중인 아빠</dd></div>
-      <div class="rv"><dt>조연</dt><dd>수업하느라 바쁜 학원 선생님들</dd></div>
       <div class="rv"><dt>소품</dt><dd>입구에 붙은 스티커 한 장</dd></div>
       <div class="rv"><dt>제작</dt><dd>Academy ON</dd></div>
     </dl>
     <p class="fin rv">이제, 사라진 시간은 없습니다.</p>
-    <a href="#invite" class="btn btn-on rv">🎟 시사회 초대장 받기</a>
+    <a href="#invite" class="btn btn-on rv" data-role="parent">🎟 무료 초대장 받기</a>
     <p class="note">Academy ON은 보조적 안심 수단이며, 보호자와 학원의 보호·감독을 대신하지 않습니다. 등장인물과 장면은 서비스 이해를 돕기 위한 예시입니다.</p>
   </div>
 </section>
 
-<div class="mcta" id="mcta"><a href="#invite" class="btn btn-on">🎟 시사회 초대장 받기</a></div>
+<div class="mcta" id="mcta"><a href="#invite" class="btn btn-on" data-role="parent">🎟 무료 초대장 받기</a></div>
 
 <script>
 /* 신청서 수신 주소: Google Apps Script 웹앱 URL (apps-script/README.md 참고) */
 const FORM_ENDPOINT = "";
 
 (function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const params = new URLSearchParams(location.search);
+  const meta = {ref: params.get('ref') || '', utm_source: params.get('utm_source') || '', utm_medium: params.get('utm_medium') || '', utm_campaign: params.get('utm_campaign') || '', referrer: document.referrer};
 
-  const nav = document.getElementById('nav'), mcta = document.getElementById('mcta'), invite = document.getElementById('invite');
+  /* ---------- 공통 연출 ---------- */
+  const nav = $('#nav'), mcta = $('#mcta'), invite = $('#invite');
   addEventListener('scroll', ()=>{
     nav.classList.toggle('solid', scrollY > 40);
     const r = invite.getBoundingClientRect();
-    mcta.classList.toggle('on', scrollY > innerHeight*0.8 && !(r.top < innerHeight && r.bottom > 0));
+    mcta.classList.toggle('on', scrollY > innerHeight*0.7 && !(r.top < innerHeight && r.bottom > 0));
   }, {passive:true});
 
   const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }), {threshold:.15});
-  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-
+  $$('.rv').forEach(el=>io.observe(el));
   const once = (el, fn, th) => new IntersectionObserver((es,o)=>es.forEach(e=>{ if(e.isIntersecting){ fn(); o.disconnect(); } }), {threshold:th}).observe(el);
 
-  const toast = document.getElementById('toast1');
-  once(toast, ()=>setTimeout(()=>toast.classList.add('in'), reduce?0:700), .5);
+  once($('#toast1'), ()=>setTimeout(()=>$('#toast1').classList.add('in'), reduce?0:600), .5);
 
-  const clock = document.getElementById('clock'), fill = document.getElementById('gapfill');
+  const clock = $('#clock'), fill = $('#gapfill');
   once(clock, ()=>{
-    const start = 16*60+52, end = 17*60+12, dur = reduce?0:4200, t0 = performance.now();
+    const start = 16*60+52, end = 17*60+12, dur = reduce?0:4000, t0 = performance.now();
     (function f(now){
       const p = dur ? Math.min(1,(now-t0)/dur) : 1;
       const m = Math.round(start + (end-start)*p);
@@ -656,78 +629,154 @@ const FORM_ENDPOINT = "";
     })(t0);
   }, .6);
 
-  const evs = [...document.querySelectorAll('.ev')];
-  once(document.querySelector('.phone'), ()=>evs.forEach((el,i)=>setTimeout(()=>el.classList.add('show'), reduce?0:i*650)), .35);
+  once($('.phone'), ()=>$$('.ev').forEach((el,i)=>setTimeout(()=>el.classList.add('show'), reduce?0:i*600)), .35);
 
+  /* ---------- 계산기 ---------- */
   let n = 2;
-  const rMin = document.getElementById('r-min'), rDay = document.getElementById('r-day');
+  const rMin = $('#r-min'), rDay = $('#r-day');
   function calc(){
     const min = +rMin.value, days = +rDay.value;
-    document.getElementById('o-n').textContent = n + (n===4?'곳+':'곳');
-    document.getElementById('o-min').textContent = min + '분';
-    document.getElementById('o-day').textContent = days + '일';
+    $('#o-n').textContent = n + (n===4?'곳+':'곳');
+    $('#o-min').textContent = min + '분';
+    $('#o-day').textContent = days + '일';
     const monthly = Math.round(n * min * days * 4.3);
-    document.getElementById('calc-num').textContent = Math.floor(monthly/60) + ':' + String(monthly%60).padStart(2,'0');
+    $('#calc-num').textContent = Math.floor(monthly/60) + ':' + String(monthly%60).padStart(2,'0');
     const movies = monthly/120;
-    document.getElementById('calc-movie').innerHTML = '영화 <b>' + movies.toFixed(1) + '편</b>을 볼 수 있는 시간이에요';
-    document.getElementById('reels').textContent = '🎬'.repeat(Math.min(12, Math.max(1, Math.round(movies))));
+    $('#calc-movie').innerHTML = '영화 <b>' + movies.toFixed(1) + '편</b>을 볼 수 있는 시간이에요';
+    $('#reels').textContent = '🎬'.repeat(Math.min(10, Math.max(1, Math.round(movies))));
   }
-  document.querySelectorAll('#seg-n button').forEach(b=>b.addEventListener('click', ()=>{
+  $$('#seg-n button').forEach(b=>b.addEventListener('click', ()=>{
     n = +b.dataset.v;
-    document.querySelectorAll('#seg-n button').forEach(x=>x.setAttribute('aria-pressed', x===b));
+    $$('#seg-n button').forEach(x=>x.setAttribute('aria-pressed', x===b));
     calc();
   }));
   rMin.addEventListener('input', calc); rDay.addEventListener('input', calc);
   calc();
 
-  const tabs = {parent: document.getElementById('tab-parent'), academy: document.getElementById('tab-academy')};
-  const forms = {parent: document.getElementById('form-parent'), academy: document.getElementById('form-academy')};
-  function show(which){ Object.keys(tabs).forEach(k=>{ const on = k===which; tabs[k].setAttribute('aria-selected', on); forms[k].hidden = !on; }); }
-  tabs.parent.addEventListener('click', ()=>show('parent'));
-  tabs.academy.addEventListener('click', ()=>show('academy'));
-  if (location.hash === '#academy-apply') show('academy');
+  /* ---------- 대상 전환 (학부모 / 원장) ---------- */
+  let role = 'parent';
+  function setRole(r){
+    role = r;
+    $$('.role button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.role===r));
+    $('#f-academies').hidden = r !== 'parent';
+    $('#region-label').innerHTML = (r==='parent' ? '사는 지역' : '학원 지역') + ' <span class="req">*</span>';
+  }
+  $$('.role button').forEach(b=>b.addEventListener('click', ()=>setRole(b.dataset.role)));
+  $$('a[data-role]').forEach(a=>a.addEventListener('click', ()=>setRole(a.dataset.role)));
 
-  const utm = Object.fromEntries(new URLSearchParams(location.search));
-  Object.values(forms).forEach(form=>{
-    const msg = form.querySelector('.msg');
-    form.addEventListener('submit', async e=>{
-      e.preventDefault();
-      msg.className = 'msg'; msg.textContent = '';
-      if (form.website.value) return;
-      const missing = [...form.querySelectorAll('[required]')].find(el=>{
-        if (el.type === 'radio') return !form.querySelector(`input[name="${el.name}"]:checked`);
-        if (el.type === 'checkbox') return !el.checked;
-        return !el.value.trim();
-      });
-      if (missing){
-        msg.className = 'msg err';
-        msg.textContent = missing.name === 'consent' ? '개인정보 수집·이용에 동의해 주세요.' : '필수 항목(*)을 모두 골라 주세요.';
-        (missing.closest('.field') || missing).scrollIntoView({behavior:'smooth', block:'center'});
-        return;
-      }
-      const contact = form.contact.value.trim();
-      if (!/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(contact) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)){
-        msg.className = 'msg err'; msg.textContent = '휴대폰 번호 또는 이메일 형식을 확인해 주세요.'; form.contact.focus(); return;
-      }
-      const data = {type: form.dataset.type, submittedAt: new Date().toISOString(), referrer: document.referrer, ...utm};
-      new FormData(form).forEach((v,k)=>{ if (k !== 'website') data[k] = data[k] ? data[k] + ', ' + v : v; });
+  // 유입 대상별 첫 화면 (?for=academy)
+  if (params.get('for') === 'academy' || location.hash === '#academy-apply'){
+    $('#hero-value').innerHTML = '원장님, 확인 전화는 줄이고 아이 안전은 지키세요.<br><span>가입·장비 없이 문자 버튼 하나로 시작합니다.</span>';
+    $('#hero-cta').textContent = '🎟 원장님 참여 신청';
+    $('#hero-cta').dataset.role = 'academy';
+    $('#hero-switch').textContent = '학부모님이신가요? 이야기부터 보기 →';
+    $('#hero-switch').href = '#story';
+    setRole('academy');
+  }
 
-      if (!FORM_ENDPOINT){
-        msg.className = 'msg err'; msg.textContent = '초대장 발급 준비 중입니다. 잠시 후 다시 시도해 주세요.';
-        console.warn('[AcademyON] FORM_ENDPOINT 미설정', data); return;
-      }
-      const btn = form.querySelector('button[type=submit]'), label = btn.textContent;
-      btn.disabled = true; btn.textContent = '발급 중…';
-      try{
-        await fetch(FORM_ENDPOINT, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(data)});
-        form.reset();
-        msg.className = 'msg ok';
-        msg.textContent = form.dataset.type === 'parent' ? '🎟 초대장이 발급되었습니다. 1호 상영관이 열리면 가장 먼저 연락드릴게요.' : '🎟 감사합니다, 원장님. 곧 연락드리겠습니다.';
-      }catch(err){
-        msg.className = 'msg err'; msg.textContent = '전송에 실패했어요. 네트워크를 확인하고 다시 시도해 주세요.';
-      }finally{ btn.disabled = false; btn.textContent = label; }
-    });
+  /* ---------- 전송 ---------- */
+  const id = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()).replace(/-/g,'').slice(0,10);
+  async function send(payload){
+    if (!FORM_ENDPOINT) throw new Error('NO_ENDPOINT');
+    await fetch(FORM_ENDPOINT, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload)});
+  }
+  const bars = $$('.steps-ind i');
+  function go(step){
+    ['#step1','#step2','#step3'].forEach((s,i)=>$(s).hidden = i !== step-1);
+    bars.forEach((b,i)=>b.classList.toggle('on', i < step));
+    $('#ticket').scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
+  }
+
+  /* STEP 1 */
+  const f1 = $('#step1'), msg1 = f1.querySelector('.msg');
+  f1.addEventListener('submit', async e=>{
+    e.preventDefault();
+    msg1.className = 'msg'; msg1.textContent = '';
+    if (f1.website.value) return;
+    const err = t => { msg1.className = 'msg err'; msg1.textContent = t; };
+    const acad = f1.querySelector('input[name=academies]:checked');
+    if (role === 'parent' && !acad) return err('아이가 다니는 학원 수를 골라 주세요.');
+    if (!f1.region.value) return err('지역을 골라 주세요.');
+    const contact = f1.contact.value.trim();
+    if (!/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(contact) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)) return err('휴대폰 번호 또는 이메일 형식을 확인해 주세요.');
+    if (!f1.consent.checked) return err('개인정보 수집·이용에 동의해 주세요.');
+
+    const btn = $('#step1-btn'), label = btn.textContent;
+    btn.disabled = true; btn.textContent = '발급 중…';
+    try{
+      await send({type: role, id, submittedAt: new Date().toISOString(), academies: role==='parent' ? acad.value : '', region: f1.region.value, contact, consent: '동의', ...meta});
+      $('#seat').textContent = (role==='parent' ? 'A-' : 'B-') + id.slice(0,3).toUpperCase();
+      startSurvey();
+      go(2);
+    }catch(x){
+      err(x.message === 'NO_ENDPOINT' ? '초대장 발급 준비 중입니다. 잠시 후 다시 시도해 주세요.' : '전송에 실패했어요. 네트워크를 확인하고 다시 시도해 주세요.');
+    }finally{ btn.disabled = false; btn.textContent = label; }
   });
+
+  /* STEP 2 : 한 화면 한 질문 */
+  const Q = {
+    parent: [
+      {k:'grade', t:'아이는 몇 학년인가요?', o:['초1~2','초3~4','초5~6','미취학','중학생']},
+      {k:'phone', t:'아이가 휴대폰을 갖고 있나요?', s:'1단계는 휴대폰이 있는 아이부터 시작해요.', o:['스마트폰','키즈폰','없음']},
+      {k:'pain', t:'가장 공감한 장면은?', s:'여러 개 골라도 돼요.', o:['회의 중 확인 전화','알림 앱 여러 개','알림 없는 학원','위치 앱으로 아이와 갈등','학원 사이 이동이 불안'], multi:true},
+      {k:'price', t:'정식 출시 후, 월 얼마까지 괜찮으세요?', o:['무료라면','2,000원까지','3,000원까지','5,000원까지','그 이상도 OK']},
+      {k:'pilot', t:'시범 운영에 직접 참여하실래요?', s:'아이가 다니는 학원에 스티커 부착을 함께 요청드려요.', o:['네, 참여할게요','먼저 지켜볼게요']}
+    ],
+    academy: [
+      {k:'kind', t:'어떤 학원인가요?', o:['태권도·체육관','음악·미술','교과(국영수 등)','기타']},
+      {k:'students', t:'초등 원생은 몇 명인가요?', o:['30명 이하','31~60명','61~100명','100명 이상']},
+      {k:'vehicle', t:'통학 차량을 운행하세요?', o:['운행함','운행 안 함']},
+      {k:'level', t:'어느 단계로 참여해 보실래요?', o:['Lv.0 문자 버튼','Lv.1 스티커 부착','Lv.2 정식 가입','설명 먼저 듣고 싶음']},
+      {k:'note', t:'출결·통학 관리에서 가장 번거로운 점은?', s:'한 줄이면 충분해요.', text:true}
+    ]
+  };
+  let qi = 0, answers = {};
+  function startSurvey(){ qi = 0; answers = {}; renderQ(); }
+  function renderQ(){
+    const list = Q[role], q = list[qi];
+    let body;
+    if (q.text){
+      body = `<textarea id="q-text" rows="3" placeholder="예) 수업 중에 확인 전화가 와요"></textarea>`;
+    } else {
+      body = '<div class="chips">' + q.o.map((o,i)=>`<label><input type="${q.multi?'checkbox':'radio'}" name="q" value="${o}"><span>${o}</span></label>`).join('') + '</div>';
+    }
+    $('#qcard').innerHTML = `<div class="q-meta"><span>Q${qi+1} / ${list.length}</span></div><h4>${q.t}</h4>${q.s?`<p class="q-sub">${q.s}</p>`:'<p class="q-sub"></p>'}${body}`;
+    $('#q-next').textContent = qi === list.length-1 ? '완료' : '다음';
+    if (!q.multi && !q.text){
+      $$('#qcard input').forEach(inp=>inp.addEventListener('change', ()=>setTimeout(next, reduce?0:260)));
+    }
+  }
+  function collect(){
+    const q = Q[role][qi];
+    if (q.text){ const v = $('#q-text').value.trim(); if (v) answers[q.k] = v.slice(0,500); }
+    else { const v = $$('#qcard input:checked').map(i=>i.value).join(', '); if (v) answers[q.k] = v; }
+  }
+  async function finishSurvey(){
+    if (Object.keys(answers).length){
+      try{ await send({type: role + '_survey', id, submittedAt: new Date().toISOString(), ...answers}); }catch(x){}
+    }
+    $('#done-text').innerHTML = role === 'parent'
+      ? '1호 상영관이 열리면 가장 먼저 연락드릴게요.<br>같은 학원에 다니는 친구 부모님과 함께 오시면, 아이 학원이 더 빨리 연결돼요.'
+      : '원장님, 감사합니다. 곧 연락드릴게요.<br>주변 원장님께도 알려 주시면 동네 전체가 함께 연결돼요.';
+    go(3);
+  }
+  function next(){ collect(); if (qi < Q[role].length-1){ qi++; renderQ(); } else finishSurvey(); }
+  $('#q-next').addEventListener('click', next);
+  $('#q-skip').addEventListener('click', ()=>{ if (qi < Q[role].length-1){ qi++; renderQ(); } else finishSurvey(); });
+
+  /* STEP 3 : 공유 */
+  const shareUrl = () => location.origin + location.pathname + '?ref=' + id + (role==='academy' ? '&for=academy' : '');
+  const shareText = role => role==='academy' ? '원장님, 학원 확인 전화 줄이는 방법 — Academy ON 베타' : '학원과 학원 사이 20분, 이제 안심하세요 — Academy ON 베타 시사회';
+  $('#share-btn').addEventListener('click', async ()=>{
+    const data = {title:'Academy ON — 사라진 20분', text: shareText(role), url: shareUrl()};
+    if (navigator.share){ try{ await navigator.share(data); }catch(x){} }
+    else copy();
+  });
+  async function copy(){
+    try{ await navigator.clipboard.writeText(shareUrl()); $('#copied').textContent = '링크를 복사했어요. 카카오톡에 붙여 넣어 보내 주세요.'; }
+    catch(x){ $('#copied').textContent = shareUrl(); }
+  }
+  $('#copy-btn').addEventListener('click', copy);
 })();
 </script>
 </body>

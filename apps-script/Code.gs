@@ -1,10 +1,14 @@
 /**
  * Academy ON 랜딩페이지 신청서 → 구글 시트 저장
- * 학부모 응답은 "학부모" 시트, 학원 응답은 "학원" 시트에 쌓입니다.
+ * 1단계 신청은 "학부모"/"학원" 시트, 2단계 선택 설문은 "학부모 설문"/"학원 설문" 시트에 쌓입니다.
+ * 두 단계는 id 열로 연결됩니다.
  */
+const META = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'referrer'];
 const SHEETS = {
-  parent: { name: '학부모', cols: ['submittedAt', 'grade', 'academies', 'phone', 'pain', 'price', 'region', 'contact', 'pilot', 'consent', 'utm_source', 'utm_medium', 'utm_campaign', 'referrer'] },
-  academy: { name: '학원', cols: ['submittedAt', 'kind', 'students', 'vehicle', 'level', 'region', 'contact', 'note', 'consent', 'utm_source', 'utm_medium', 'utm_campaign', 'referrer'] },
+  parent:         { name: '학부모',      cols: ['submittedAt', 'id', 'academies', 'region', 'contact', 'consent', ...META] },
+  academy:        { name: '학원',        cols: ['submittedAt', 'id', 'region', 'contact', 'consent', ...META] },
+  parent_survey:  { name: '학부모 설문', cols: ['submittedAt', 'id', 'grade', 'phone', 'pain', 'price', 'pilot'] },
+  academy_survey: { name: '학원 설문',   cols: ['submittedAt', 'id', 'kind', 'students', 'vehicle', 'level', 'note'] },
 };
 
 function doPost(e) {
