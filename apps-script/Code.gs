@@ -3,7 +3,7 @@
  * 학부모 응답은 "학부모" 시트, 학원 응답은 "학원" 시트에 쌓입니다.
  */
 const SHEETS = {
-  parent: { name: '학부모', cols: ['submittedAt', 'grade', 'academies', 'phone', 'channels', 'price', 'region', 'contact', 'pilot', 'consent', 'utm_source', 'utm_medium', 'utm_campaign', 'referrer'] },
+  parent: { name: '학부모', cols: ['submittedAt', 'grade', 'academies', 'phone', 'pain', 'price', 'region', 'contact', 'pilot', 'consent', 'utm_source', 'utm_medium', 'utm_campaign', 'referrer'] },
   academy: { name: '학원', cols: ['submittedAt', 'kind', 'students', 'vehicle', 'level', 'region', 'contact', 'note', 'consent', 'utm_source', 'utm_medium', 'utm_campaign', 'referrer'] },
 };
 
