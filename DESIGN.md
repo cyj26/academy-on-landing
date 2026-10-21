@@ -59,6 +59,7 @@
 
 ## 파일
 
-- `index.html`: 이미지 포함 단일 파일 (약 266KB)
+- `index.html`: 웹 버전 (교수님 원본, 수정하지 않음) → `/academy-on-landing/`
+- `mobile/index.html`: 모바일 버전, 이 기준서의 대상 (이미지 포함 약 266KB) → `/academy-on-landing/mobile/`
 - `design-baseline/`: 기준 화면 캡처
 - `tools/design-check.py`: 기준 비교 스크립트

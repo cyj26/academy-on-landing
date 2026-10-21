@@ -17,7 +17,7 @@ from PIL import Image, ImageChops
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGE = ROOT / "index.html"
+PAGE = ROOT / "mobile" / "index.html"
 BASE = ROOT / "design-baseline"
 OUT = ROOT / "design-check-out"
 THRESHOLD = 0.02  # 화면 픽셀 2% 이상 바뀌면 경고
