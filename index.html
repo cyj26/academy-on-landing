@@ -1656,11 +1656,32 @@
       journeyStops.forEach((stop, index) => stop.classList.toggle('done', index < done));
     }
 
-    const storyObserver = new IntersectionObserver(entries => {
-      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) setStory(visible.target);
-    }, { rootMargin: '-30% 0px -44% 0px', threshold: [0, .2, .5, .8] });
-    storySteps.forEach(step => storyObserver.observe(step));
+    // 화면 45% 높이의 기준선을 이미 지나간 마지막 장면을 현재 장면으로 고른다.
+    // (이전 장면이 화면을 빠져나갈 때 다시 선택되며 깜빡이던 문제 수정)
+    let activeStep = null;
+    let storyTicking = false;
+    function pickStoryStep() {
+      storyTicking = false;
+      const line = window.innerHeight * 0.45;
+      let current = storySteps[0];
+      for (const step of storySteps) {
+        if (step.getBoundingClientRect().top <= line) current = step;
+        else break;
+      }
+      if (current !== activeStep) {
+        activeStep = current;
+        setStory(current);
+      }
+    }
+    function requestStoryPick() {
+      if (!storyTicking) {
+        storyTicking = true;
+        requestAnimationFrame(pickStoryStep);
+      }
+    }
+    window.addEventListener('scroll', requestStoryPick, { passive: true });
+    window.addEventListener('resize', requestStoryPick);
+    pickStoryStep();
 
     let academyCount = 2;
     const minutesInput = document.getElementById('minutes');
