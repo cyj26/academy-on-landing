@@ -238,7 +238,9 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--on-ink);
 .chips span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1.5px solid #DDD5C7;border-radius:999px;font-size:15px;font-weight:600;background:#fff;transition:all .12s}
 .chips input:checked+span{background:var(--ink);border-color:var(--ink);color:#fff}
 .chips input:focus-visible+span{box-shadow:0 0 0 3px #BDEFD6}
-.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin-bottom:18px;cursor:pointer;color:#444}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin-bottom:6px;cursor:pointer;color:#444}
+.terms{font-size:12.5px;color:#7A7F89;margin:0 0 18px 30px}
+.terms summary{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .consent input{width:20px;height:20px;margin-top:2px;accent-color:var(--on-ink);flex:none}
 .consent details{margin-top:4px;font-size:12.5px;color:#7A7F89}
 .consent summary{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
@@ -530,8 +532,8 @@ details.qa p{margin-top:10px;color:var(--mute);font-size:15.5px}
           <select id="region" name="region" required><option value="">선택해 주세요</option><option>대전 유성구</option><option>대전 서구</option><option>대전 중구</option><option>대전 동구</option><option>대전 대덕구</option><option>세종</option><option>충북</option><option>충남</option><option>그 외 지역</option></select></div>
         <div class="field"><label for="contact">초대장 받을 휴대폰 번호 또는 이메일 <span class="req">*</span></label>
           <input id="contact" name="contact" type="text" inputmode="email" autocomplete="tel" placeholder="010-0000-0000 또는 name@email.com" required></div>
-        <label class="consent"><input type="checkbox" name="consent" value="동의" required><span><b>개인정보 수집·이용에 동의합니다</b> <span class="req">*</span>
-          <details><summary>자세히 보기</summary>수집 항목: 연락처, 지역, 설문 응답 · 목적: 베타 안내와 서비스 설계 · 보관: 베타 종료 후 6개월 이내 파기. 아이의 이름·사진은 받지 않습니다. 동의하지 않으시면 신청이 어렵습니다.</details></span></label>
+        <label class="consent"><input type="checkbox" name="consent" value="동의" required><span><b>개인정보 수집·이용에 동의합니다</b> <span class="req">*</span></span></label>
+        <details class="terms"><summary>자세히 보기</summary>수집 항목: 연락처, 지역, 설문 응답 · 목적: 베타 안내와 서비스 설계 · 보관: 베타 종료 후 6개월 이내 파기. 아이의 이름·사진은 받지 않습니다. 동의하지 않으시면 신청이 어렵습니다.</details>
         <button type="submit" class="btn btn-on" id="step1-btn">🎟 초대장 받기</button>
         <div class="msg" role="alert"></div>
       </form>
