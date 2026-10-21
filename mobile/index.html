@@ -1735,31 +1735,43 @@
     }
 
     // 화면 45% 높이의 기준선을 이미 지나간 마지막 장면을 현재 장면으로 고른다.
-    // (이전 장면이 화면을 빠져나갈 때 다시 선택되며 깜빡이던 문제 수정)
-    let activeStep = null;
+    // - 아래로 스크롤하는 중에는 앞 장면으로, 위로 스크롤하는 중에는 뒤 장면으로 돌아가지 않는다.
+    // - 휴대폰 주소창이 접히고 펴질 때 바뀌는 높이는 무시해 기준선이 흔들리지 않게 한다.
+    let activeIndex = -1;
     let storyTicking = false;
-    function pickStoryStep() {
+    let lastScrollY = window.scrollY;
+    let lastWidth = window.innerWidth;
+    let storyLine = window.innerHeight * 0.45;
+    function pickStoryStep(force) {
       storyTicking = false;
-      const line = window.innerHeight * 0.45;
-      let current = storySteps[0];
-      for (const step of storySteps) {
-        if (step.getBoundingClientRect().top <= line) current = step;
+      const y = window.scrollY;
+      const dir = y > lastScrollY ? 1 : (y < lastScrollY ? -1 : 0);
+      lastScrollY = y;
+      let index = 0;
+      for (let i = 0; i < storySteps.length; i++) {
+        if (storySteps[i].getBoundingClientRect().top <= storyLine) index = i;
         else break;
       }
-      if (current !== activeStep) {
-        activeStep = current;
-        setStory(current);
-      }
+      if (index === activeIndex) return;
+      if (!force && activeIndex >= 0 && ((dir > 0 && index < activeIndex) || (dir < 0 && index > activeIndex))) return;
+      activeIndex = index;
+      setStory(storySteps[index]);
     }
     function requestStoryPick() {
       if (!storyTicking) {
         storyTicking = true;
-        requestAnimationFrame(pickStoryStep);
+        requestAnimationFrame(() => pickStoryStep(false));
       }
     }
     window.addEventListener('scroll', requestStoryPick, { passive: true });
-    window.addEventListener('resize', requestStoryPick);
-    pickStoryStep();
+    window.addEventListener('resize', () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        storyLine = window.innerHeight * 0.45;
+        pickStoryStep(true);
+      }
+    });
+    pickStoryStep(true);
 
     let academyCount = 2;
     const minutesInput = document.getElementById('minutes');
