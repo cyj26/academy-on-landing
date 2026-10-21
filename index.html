@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Academy ON — 학원과 학원 사이, 아이 안심 출결</title>
+<meta name="description" content="학원이 몇 곳이든 출결은 앱 하나로. 학원과 학원 사이 미도착까지 알려주는 학부모 안심 서비스, Academy ON 베타 신청.">
+<meta property="og:title" content="Academy ON — 학원과 학원 사이, 그 20분이 걱정이라면">
+<meta property="og:description" content="학원이 몇 곳이든 출결은 앱 하나로. 대전·충청권 베타 참여 가정을 모집합니다.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#FAF7F2; --surface:#FFFFFF; --ink:#152238; --ink-2:#4A5568; --line:#E6E0D6;
+  --on:#14955F; --on-soft:#E3F4EC; --warn:#E8962E; --warn-soft:#FDF1E1; --navy:#152238;
+  --radius:18px; --shadow:0 10px 30px rgba(21,34,56,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:88px 0}
+h1,h2,h3{line-height:1.3;letter-spacing:-.02em}
+h2{font-size:clamp(26px,4vw,36px);font-weight:800;margin-bottom:14px}
+.lead{color:var(--ink-2);font-size:17px;max-width:620px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--on);margin-bottom:12px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--on);box-shadow:0 0 0 4px var(--on-soft)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(250,247,242,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:900;font-size:19px;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo b{color:var(--on)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--navy);color:#fff;padding:14px 26px;font-size:16px}
+.btn-primary:hover{box-shadow:0 8px 20px rgba(21,34,56,.25)}
+.btn-ghost{background:transparent;color:var(--ink);padding:14px 22px;font-size:16px;border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-sm{padding:9px 16px;font-size:14px}
+
+/* hero */
+.hero{padding:64px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(34px,5.6vw,56px);font-weight:900;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--on)}
+.hero .lead{font-size:18px;margin-bottom:32px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.hero-note{margin-top:18px;font-size:14px;color:var(--ink-2)}
+
+/* phone mock */
+.phone{background:var(--surface);border-radius:32px;box-shadow:var(--shadow);border:1px solid var(--line);padding:22px 20px;max-width:360px;margin-left:auto}
+.phone-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.phone-head strong{font-size:17px}
+.phone-head span{font-size:13px;color:var(--ink-2)}
+.tl{list-style:none;position:relative}
+.tl:before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.tl li{position:relative;padding:0 0 16px 36px}
+.tl li:last-child{padding-bottom:0}
+.tl .mk{position:absolute;left:4px;top:5px;width:16px;height:16px;border-radius:50%;background:var(--on);border:3px solid var(--on-soft)}
+.tl .mk.warn{background:var(--warn);border-color:var(--warn-soft)}
+.tl .mk.wait{background:#fff;border:2px dashed #B9B1A4}
+.tl time{font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.tl p{font-size:15px;font-weight:600}
+.tl .alert{margin-top:6px;background:var(--warn-soft);border-radius:12px;padding:10px 12px;font-size:13px;font-weight:500;color:#7A4A0E}
+
+/* stats strip */
+.strip{background:var(--navy);color:#fff;padding:40px 0}
+.strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.strip strong{display:block;font-size:34px;font-weight:900;letter-spacing:-.02em}
+.strip span{font-size:15px;opacity:.85}
+.strip small{display:block;font-size:12px;opacity:.55;margin-top:4px}
+
+/* cards */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px}
+.card .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--on-soft);margin-bottom:16px}
+.card .ic svg{width:22px;height:22px;stroke:var(--on);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card.warn .ic{background:var(--warn-soft)}
+.card.warn .ic svg{stroke:var(--warn)}
+.card h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.card p{color:var(--ink-2);font-size:15px}
+
+/* steps */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.step{position:relative;padding:28px 24px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line)}
+.step:before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;margin-bottom:16px}
+.step h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.step p{color:var(--ink-2);font-size:15px}
+
+/* principles */
+.alt{background:#F2EDE4}
+.plist{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px}
+.pitem{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border-radius:14px;padding:20px}
+.pitem .ck{flex:none;width:26px;height:26px;border-radius:50%;background:var(--on);display:grid;place-items:center;margin-top:2px}
+.pitem .ck svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:3}
+.pitem h3{font-size:17px;font-weight:800;margin-bottom:2px}
+.pitem p{font-size:15px;color:var(--ink-2)}
+
+/* levels */
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.lv{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px}
+.lv .tag{display:inline-block;font-size:13px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--on-soft);color:var(--on);margin-bottom:12px}
+.lv h3{font-size:18px;font-weight:800;margin-bottom:10px}
+.lv dl{font-size:14px}
+.lv dt{color:var(--ink-2);font-weight:600;margin-top:8px}
+.lv dd{font-weight:500}
+
+/* form */
+.form-sec .wrap{max-width:720px}
+.tabs{display:flex;gap:6px;background:#EDE7DC;padding:5px;border-radius:999px;margin:28px 0 24px}
+.tabs button{flex:1;border:0;background:transparent;font:inherit;font-weight:700;font-size:15px;padding:11px;border-radius:999px;cursor:pointer;color:var(--ink-2)}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+form{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:30px 26px;box-shadow:var(--shadow)}
+.field{margin-bottom:22px}
+.field>label,.field legend{display:block;font-weight:700;font-size:15px;margin-bottom:8px}
+.field legend{padding:0}
+fieldset{border:0}
+.req{color:var(--warn)}
+input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--on);box-shadow:0 0 0 3px var(--on-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:9px 15px;border:1.5px solid var(--line);border-radius:999px;font-size:15px;font-weight:500;transition:all .12s}
+.chips input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.chips input:focus-visible+span{box-shadow:0 0 0 3px var(--on-soft)}
+.hint{font-size:13px;color:var(--ink-2);margin-top:6px}
+.consent{background:#F7F4EE;border-radius:12px;padding:16px;font-size:13px;color:var(--ink-2);margin-bottom:16px}
+.consent strong{color:var(--ink)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:600;margin-bottom:22px;cursor:pointer}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--on)}
+form .btn-primary{width:100%;padding:16px}
+.msg{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;font-size:15px;font-weight:600}
+.msg.ok{display:block;background:var(--on-soft);color:#0D6B44}
+.msg.err{display:block;background:var(--warn-soft);color:#7A4A0E}
+.hp{position:absolute;left:-9999px}
+
+/* faq */
+.faq{margin-top:32px;max-width:760px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:10px}
+summary{font-weight:700;font-size:16px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:22px;line-height:1;color:var(--ink-2)}
+details[open] summary:after{content:"−"}
+details p{margin-top:10px;color:var(--ink-2);font-size:15px}
+
+footer{border-top:1px solid var(--line);padding:36px 0 48px;font-size:13px;color:var(--ink-2)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (max-width:860px){
+  section{padding:64px 0}
+  .hero .wrap{grid-template-columns:1fr;gap:40px}
+  .phone{margin:0 auto}
+  .grid3,.steps,.levels{grid-template-columns:1fr}
+  .plist{grid-template-columns:1fr}
+  .strip .wrap{grid-template-columns:1fr;gap:18px;text-align:left}
+  .nav-cta{display:none}
+  form{padding:24px 18px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo"><span class="dot"></span>Academy <b>ON</b></a>
+    <a href="#apply" class="btn btn-primary btn-sm nav-cta">베타 신청하기</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>대전·충청권 베타 참여 가정 모집</div>
+      <h1>학원과 학원 사이,<br>그 <em>20분</em>이 걱정이라면</h1>
+      <p class="lead">학원이 몇 곳이든 출결은 앱 하나로. 아이가 다음 학원에 제때 도착하지 않았을 때만 조용히 알려드립니다. 위치 추적 없이, 입실 여부만.</p>
+      <div class="cta-row">
+        <a href="#apply" class="btn btn-primary" data-tab="parent">학부모 베타 신청</a>
+        <a href="#apply" class="btn btn-ghost" data-tab="academy">학원 원장님이신가요?</a>
+      </div>
+      <p class="hero-note">신청하신 가정께는 시범 운영이 시작되면 가장 먼저 연락드립니다.</p>
+    </div>
+
+    <div class="phone" role="figure" aria-label="부모 앱 화면 예시">
+      <div class="phone-head"><strong>지우의 오늘</strong><span>화요일</span></div>
+      <ul class="tl">
+        <li><span class="mk"></span><time>14:02</time><p>태권도 입실</p></li>
+        <li><span class="mk"></span><time>15:48</time><p>태권도 퇴실 · 차량 승차</p></li>
+        <li><span class="mk"></span><time>16:01</time><p>피아노 입실</p></li>
+        <li><span class="mk"></span><time>16:52</time><p>피아노 퇴실</p></li>
+        <li><span class="mk warn"></span><time>17:15</time><p>수학학원 미도착</p>
+          <div class="alert">학원에 먼저 확인했어요. 아직 도착하지 않았습니다.</div></li>
+        <li><span class="mk wait"></span><time>18:30</time><p>수학학원 퇴실 예정</p></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div><strong>84.4%</strong><span>초등학생 사교육 참여율</span><small>2025 사교육비조사</small></div>
+    <div><strong>60.4%</strong><span>18세 미만 자녀를 둔 부부의 맞벌이 비율</span><small>2025 맞벌이 가구 고용현황</small></div>
+    <div><strong>1초</strong><span>학원 입구 스티커에 휴대폰을 터치하면 입실 기록 끝</span><small>학원은 장비·가입 없이 스티커 한 장</small></div>
+  </div>
+</div>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>지금 부모님들이 겪는 일</div>
+    <h2>알림은 학원마다 제각각,<br>정작 궁금한 순간은 비어 있습니다</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>알림 채널이 다 달라요</h3>
+        <p>태권도는 문자, 피아노는 카카오톡, 수학은 전용 앱. 알림이 오지 않는 학원도 있습니다.</p>
+      </div>
+      <div class="card warn">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>학원 사이는 아무도 몰라요</h3>
+        <p>한 학원을 나와 다음 학원에 들어가기까지. 그 사이에 무슨 일이 있었는지는 누구도 확인하지 않습니다.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></div>
+        <h3>회의 중에도 전화를 걸어요</h3>
+        <p>"아이 잘 들어갔나요?" 확인 전화는 부모에게도, 수업 중인 선생님에게도 부담입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="alt">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>작동 방식</div>
+    <h2>스티커 한 장, 1초 터치로 시작합니다</h2>
+    <p class="lead">학원 입구와 차량에 NFC 스티커 한 장만 붙이면 됩니다. 학원은 장비도, 가입도 필요 없습니다.</p>
+    <div class="steps">
+      <div class="step"><h3>1초 터치로 기록</h3><p>아이가 학원 입구 스티커에 휴대폰을 터치하면 입실이 기록됩니다. 위조 방지 NFC로 가짜 출석을 막습니다.</p></div>
+      <div class="step"><h3>늦으면 학원에 먼저 확인</h3><p>평소 이동 시간을 넘기면 부모님보다 학원에 먼저 확인합니다. 결석·지각을 미리 등록해 두면 알림이 가지 않습니다.</p></div>
+      <div class="step"><h3>문제가 있을 때만 알림</h3><p>확인되지 않을 때만 부모님께 알려드립니다. 하루 기록은 앱에서 언제든 볼 수 있습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="principles">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Academy ON의 약속</div>
+    <h2>아이의 위치가 아니라,<br>"잘 들어갔는지"만 확인합니다</h2>
+    <div class="plist">
+      <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div><div><h3>위치 추적을 하지 않습니다</h3><p>지도 위 좌표가 아니라 학원 입실·퇴실 기록만 남깁니다.</p></div></div>
+      <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div><div><h3>알림은 필요할 때만</h3><p>매번 울리는 알림 대신, 도착하지 않았을 때만 알려드립니다.</p></div></div>
+      <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div><div><h3>어떤 출결앱을 쓰든 연결</h3><p>학원이 이미 쓰는 시스템과 상관없이 아이 기준으로 하루를 모아 봅니다.</p></div></div>
+      <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div><div><h3>보호자 동의가 먼저</h3><p>14세 미만 아동은 법정대리인 동의를 받은 뒤에만 이용할 수 있습니다.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="academy" class="alt">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>학원 원장님께</div>
+    <h2>가입하지 않아도 함께할 수 있습니다</h2>
+    <p class="lead">학원의 부담은 최소로. 참여 방식은 원장님이 고르시면 됩니다.</p>
+    <div class="levels">
+      <div class="lv"><span class="tag">Lv.0 미가입</span><h3>문자 버튼 하나</h3><dl><dt>학원이 하는 일</dt><dd>미도착 시 받은 문자 링크에서 "도착/미도착"만 누르기</dd><dt>설치·가입</dt><dd>필요 없음</dd></dl></div>
+      <div class="lv"><span class="tag">Lv.1 스티커</span><h3>입구에 한 장</h3><dl><dt>학원이 하는 일</dt><dd>입구·차량에 NFC 스티커 부착</dd><dt>학부모가 얻는 것</dt><dd>아이 터치로 입실·승차 기록</dd></dl></div>
+      <div class="lv"><span class="tag">Lv.2 정식 가입</span><h3>자동 출결 관리</h3><dl><dt>학원이 하는 일</dt><dd>공기계·선생님 폰으로 태그 인식</dd><dt>학원이 얻는 것</dt><dd>통합 타임라인, 승하차 기록, 문의 전화 감소</dd></dl></div>
+    </div>
+  </div>
+</section>
+
+<section id="apply" class="form-sec">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>베타 신청</div>
+    <h2>가장 먼저 써 보세요</h2>
+    <p class="lead">1분이면 끝납니다. 답변은 서비스 설계에만 사용합니다.</p>
+
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-parent" aria-selected="true" aria-controls="form-parent">학부모</button>
+      <button type="button" role="tab" id="tab-academy" aria-selected="false" aria-controls="form-academy">학원 원장·선생님</button>
+    </div>
+
+    <!-- 학부모 -->
+    <form id="form-parent" data-type="parent" role="tabpanel" aria-labelledby="tab-parent" novalidate>
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field">
+        <fieldset><legend>아이의 학년 <span class="req">*</span></legend>
+        <div class="chips">
+          <label><input type="radio" name="grade" value="초1-2" required><span>초1~2</span></label>
+          <label><input type="radio" name="grade" value="초3-4"><span>초3~4</span></label>
+          <label><input type="radio" name="grade" value="초5-6"><span>초5~6</span></label>
+          <label><input type="radio" name="grade" value="미취학"><span>미취학</span></label>
+          <label><input type="radio" name="grade" value="중학생"><span>중학생</span></label>
+        </div></fieldset>
+      </div>
+      <div class="field">
+        <fieldset><legend>평일에 다니는 학원 수 <span class="req">*</span></legend>
+        <div class="chips">
+          <label><input type="radio" name="academies" value="1" required><span>1곳</span></label>
+          <label><input type="radio" name="academies" value="2"><span>2곳</span></label>
+          <label><input type="radio" name="academies" value="3"><span>3곳</span></label>
+          <label><input type="radio" name="academies" value="4+"><span>4곳 이상</span></label>
+        </div></fieldset>
+      </div>
+      <div class="field">
+        <fieldset><legend>아이가 휴대폰을 갖고 있나요? <span class="req">*</span></legend>
+        <div class="chips">
+          <label><input type="radio" name="phone" value="스마트폰" required><span>스마트폰</span></label>
+          <label><input type="radio" name="phone" value="키즈폰"><span>키즈폰</span></label>
+          <label><input type="radio" name="phone" value="없음"><span>없음</span></label>
+        </div></fieldset>
+      </div>
+      <div class="field">
+        <fieldset><legend>현재 학원 알림을 받는 방법 <span class="hint" style="display:inline">(복수 선택)</span></legend>
+        <div class="chips">
+          <label><input type="checkbox" name="channels" value="문자"><span>문자</span></label>
+          <label><input type="checkbox" name="channels" value="카카오톡"><span>카카오톡</span></label>
+          <label><input type="checkbox" name="channels" value="학원 전용 앱"><span>학원 전용 앱</span></label>
+          <label><input type="checkbox" name="channels" value="전화"><span>전화</span></label>
+          <label><input type="checkbox" name="channels" value="알림 없음"><span>알림 없는 학원 있음</span></label>
+        </div></fieldset>
+      </div>
+      <div class="field">
+        <fieldset><legend>이 서비스에 월 얼마까지 낼 의향이 있으신가요? <span class="req">*</span></legend>
+        <div class="chips">
+          <label><input type="radio" name="price" value="무료만" required><span>무료라면 사용</span></label>
+          <label><input type="radio" name="price" value="~2000"><span>월 2,000원까지</span></label>
+          <label><input type="radio" name="price" value="~3000"><span>월 3,000원까지</span></label>
+          <label><input type="radio" name="price" value="~5000"><span>월 5,000원까지</span></label>
+          <label><input type="radio" name="price" value="5000+"><span>그 이상도 괜찮음</span></label>
+        </div></fieldset>
+      </div>
+      <div class="field">
+        <label for="p-region">사는 지역 <span class="req">*</span></label>
+        <select id="p-region" name="region" required>
+          <option value="">선택해 주세요</option>
+          <option>대전 유성구</option><option>대전 서구</option><option>대전 중구</option><option>대전 동구</option><option>대전 대덕구</option>
+          <option>세종</option><option>충북</option><option>충남</option><option>그 외 지역</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="p-contact">연락받을 휴대폰 번호 또는 이메일 <span class="req">*</span></label>
+        <input id="p-contact" name="contact" type="text" inputmode="email" autocomplete="email" placeholder="010-0000-0000 또는 name@email.com" required>
+      </div>
+      <div class="field">
+        <fieldset><legend>참여 의향</legend>
+        <label class="check" style="margin-bottom:0"><input type="checkbox" name="pilot" value="예"><span>시범 운영에 직접 참여하고 싶어요 (아이가 다니는 학원 연결 포함)</span></label>
+        </fieldset>
+      </div>
+      <div class="consent"><strong>개인정보 수집·이용 안내</strong><br>수집 항목: 연락처, 지역, 설문 응답 · 목적: 베타 서비스 안내와 서비스 설계 · 보관 기간: 베타 종료 후 6개월 이내 파기. 아이의 이름이나 사진은 받지 않습니다. 동의하지 않으셔도 되며, 이 경우 신청이 어렵습니다.</div>
+      <label class="check"><input type="checkbox" name="consent" value="동의" required><span>개인정보 수집·이용에 동의합니다 <span class="req">*</span></span></label>
+      <button type="submit" class="btn btn-primary">베타 신청하기</button>
+      <div class="msg" role="status" aria-live="polite"></div>
+    </form>
+
+    <!-- 학원 -->
+    <form id="form-academy" data-type="academy" role="tabpanel" aria-labelledby="tab-academy" hidden novalidate>
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field">
+        <fieldset><legend>학원 종류 <span class="req">*</span></legend>
+        <div class="chips">
+          <label><input type="radio" name="kind" value="태권도·체육관" required><span>태권도·체육관</span></label>
+          <label><input type="radio" name="kind" value="음악·미술"><span>음악·미술</span></label>
+          <label><input type="radio" name="kind" value="교과"><span>교과(국영수 등)</span></label>
+          <label><input type="radio" name="kind" value="기타"><span>기타</span></label>
+        </div></fieldset>
+      </div>
+      <div class="field">
+        <fieldset><legend>초등 원생 수 <span class="req">*</span></legend>
+        <div class="chips">
+          <label><input type="radio" name="students" value="~30" required><span>30명 이하</span></label>
+          <label><input type="radio" name="students" value="31-60"><span>31~60명</span></label>
+          <label><input type="radio" name="students" value="61-100"><span>61~100명</span></label>
+          <label><input type="radio" name="students" value="100+"><span>100명 이상</span></label>
+        </div></fieldset>
+      </div>
+      <div class="field">
+        <fieldset><legend>통학 차량 운행 여부 <span class="req">*</span></legend>
+        <div class="chips">
+          <label><input type="radio" name="vehicle" value="운행" required><span>운행함</span></label>
+          <label><input type="radio" name="vehicle" value="미운행"><span>운행 안 함</span></label>
+        </div></fieldset>
+      </div>
+      <div class="field">
+        <fieldset><legend>참여해 볼 수 있는 단계 <span class="req">*</span></legend>
+        <div class="chips">
+          <label><input type="radio" name="level" value="Lv.0" required><span>Lv.0 문자 확인만</span></label>
+          <label><input type="radio" name="level" value="Lv.1"><span>Lv.1 스티커 부착</span></label>
+          <label><input type="radio" name="level" value="Lv.2"><span>Lv.2 정식 가입</span></label>
+          <label><input type="radio" name="level" value="미정"><span>설명을 더 듣고 싶음</span></label>
+        </div></fieldset>
+      </div>
+      <div class="field">
+        <label for="a-region">학원 지역 <span class="req">*</span></label>
+        <select id="a-region" name="region" required>
+          <option value="">선택해 주세요</option>
+          <option>대전 유성구</option><option>대전 서구</option><option>대전 중구</option><option>대전 동구</option><option>대전 대덕구</option>
+          <option>세종</option><option>충북</option><option>충남</option><option>그 외 지역</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="a-contact">연락받을 휴대폰 번호 또는 이메일 <span class="req">*</span></label>
+        <input id="a-contact" name="contact" type="text" inputmode="email" placeholder="010-0000-0000 또는 name@email.com" required>
+      </div>
+      <div class="field">
+        <label for="a-note">하고 싶은 말씀 <span class="hint" style="display:inline">(선택)</span></label>
+        <textarea id="a-note" name="note" rows="3" placeholder="출결·통학 관리에서 가장 번거로운 점을 알려 주세요"></textarea>
+      </div>
+      <div class="consent"><strong>개인정보 수집·이용 안내</strong><br>수집 항목: 연락처, 학원 정보, 설문 응답 · 목적: 베타 서비스 안내와 서비스 설계 · 보관 기간: 베타 종료 후 6개월 이내 파기.</div>
+      <label class="check"><input type="checkbox" name="consent" value="동의" required><span>개인정보 수집·이용에 동의합니다 <span class="req">*</span></span></label>
+      <button type="submit" class="btn btn-primary">참여 신청하기</button>
+      <div class="msg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>자주 묻는 질문</div>
+    <h2>궁금하실 만한 것들</h2>
+    <div class="faq">
+      <details><summary>아이 위치를 계속 추적하나요?</summary><p>아니요. GPS 좌표는 수집하지 않습니다. 아이가 학원 입구 스티커에 터치한 "입실·퇴실 기록"만 남깁니다.</p></details>
+      <details><summary>아이가 다니는 학원이 Academy ON을 안 쓰면요?</summary><p>학원이 가입하지 않아도 됩니다. 부모님이 등록한 시간표를 기준으로, 도착이 늦어지면 원장님께 문자 버튼으로 도착 여부를 여쭤봅니다(Lv.0).</p></details>
+      <details><summary>휴대폰이 없는 저학년은 어떻게 하나요?</summary><p>1단계는 휴대폰이 있는 초등 고학년부터 시작합니다. 저학년은 NFC 키링 태그를 학원 공기계나 차량 동승자 휴대폰에 터치하는 방식으로 확장할 예정입니다.</p></details>
+      <details><summary>아이가 터치를 깜빡하면 알림이 계속 오지 않나요?</summary><p>첫 2주는 알림 없이 기록만 쌓는 적응 기간을 둡니다. 부모님께 알리기 전에 아이 휴대폰으로 먼저 터치 요청을 보냅니다.</p></details>
+      <details><summary>비용은 얼마인가요?</summary><p>베타 기간에는 무료입니다. 정식 가격은 베타 참여 가정의 의견을 듣고 정하려고 합니다.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span><strong>Academy ON</strong> · 학원과 학원 사이를 채우는 안심 출결</span>
+    <span>대전·충청권 시범 운영 준비 중 · 보조적 안심 수단이며, 보호자와 학원의 보호·감독을 대신하지 않습니다.</span>
+  </div>
+</footer>
+
+<script>
+/* 신청서 수신 주소: Google Apps Script 웹앱 URL을 넣으면 응답이 구글 시트에 쌓입니다 (apps-script/README.md 참고). */
+const FORM_ENDPOINT = "";
+
+(function(){
+  const tabs = {parent: document.getElementById('tab-parent'), academy: document.getElementById('tab-academy')};
+  const forms = {parent: document.getElementById('form-parent'), academy: document.getElementById('form-academy')};
+  function show(which){
+    Object.keys(tabs).forEach(k=>{
+      const on = k===which;
+      tabs[k].setAttribute('aria-selected', on);
+      forms[k].hidden = !on;
+    });
+  }
+  tabs.parent.addEventListener('click', ()=>show('parent'));
+  tabs.academy.addEventListener('click', ()=>show('academy'));
+  document.querySelectorAll('[data-tab]').forEach(a=>a.addEventListener('click', ()=>show(a.dataset.tab)));
+  if (location.hash === '#academy-apply') show('academy');
+
+  const utm = Object.fromEntries(new URLSearchParams(location.search));
+
+  Object.values(forms).forEach(form=>{
+    const msg = form.querySelector('.msg');
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      msg.className = 'msg'; msg.textContent = '';
+      if (form.website.value) return; // bot
+
+      // 필수 항목 확인
+      const missing = [...form.querySelectorAll('[required]')].find(el=>{
+        if (el.type === 'radio') return !form.querySelector(`input[name="${el.name}"]:checked`);
+        if (el.type === 'checkbox') return !el.checked;
+        return !el.value.trim();
+      });
+      if (missing){
+        msg.className = 'msg err';
+        msg.textContent = missing.name === 'consent' ? '개인정보 수집·이용에 동의해 주세요.' : '필수 항목(*)을 모두 입력해 주세요.';
+        (missing.closest('.field') || missing).scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+      }
+      const contact = form.contact.value.trim();
+      if (!/^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(contact) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)){
+        msg.className = 'msg err'; msg.textContent = '휴대폰 번호 또는 이메일 형식을 확인해 주세요.'; form.contact.focus(); return;
+      }
+
+      const data = {type: form.dataset.type, submittedAt: new Date().toISOString(), referrer: document.referrer, ...utm};
+      new FormData(form).forEach((v,k)=>{
+        if (k === 'website') return;
+        data[k] = data[k] ? data[k] + ', ' + v : v;
+      });
+
+      if (!FORM_ENDPOINT){
+        msg.className = 'msg err';
+        msg.textContent = '신청 접수 준비 중입니다. 잠시 후 다시 시도해 주세요.';
+        console.warn('[AcademyON] FORM_ENDPOINT 미설정', data);
+        return;
+      }
+
+      const btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; const label = btn.textContent; btn.textContent = '보내는 중…';
+      try{
+        await fetch(FORM_ENDPOINT, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(data)});
+        form.reset();
+        msg.className = 'msg ok';
+        msg.textContent = form.dataset.type === 'parent'
+          ? '신청이 완료되었습니다. 시범 운영이 시작되면 가장 먼저 연락드릴게요.'
+          : '감사합니다. 원장님께 곧 연락드리겠습니다.';
+      }catch(err){
+        msg.className = 'msg err'; msg.textContent = '전송에 실패했습니다. 네트워크를 확인하고 다시 시도해 주세요.';
+      }finally{
+        btn.disabled = false; btn.textContent = label;
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
