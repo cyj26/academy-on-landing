@@ -877,6 +877,15 @@
     .calc-plan em { display: block; margin-top: 4px; color: rgba(255,255,255,.86); font-size: 13.5px; font-style: normal; line-height: 1.55; }
     .calc-plan a { display: inline-block; margin-top: 10px; color: white; font-weight: 850; font-size: 14px; }
     .calc-save { margin-top: 4px; min-height: 52px; }
+    /* 설문: 질문과 선택지를 또렷하게 구분 */
+    .followup { counter-reset: q; }
+    .followup .form-group { counter-increment: q; margin-top: 22px; padding-top: 22px; border-top: 1px dashed rgba(23,55,47,.16); }
+    .followup .form-group > label { margin-bottom: 12px; font-size: 17px; font-weight: 900; letter-spacing: -.03em; color: var(--ink); }
+    .followup .form-group > label::before { content: "Q" counter(q) ". "; color: var(--green); }
+    .followup .option-grid span { background: #fff; border-width: 1.5px; color: var(--ink-2); font-weight: 600; }
+    .followup .option-grid input:checked + span { color: #fff; font-weight: 800; }
+    .followup .contact-panel .form-group { counter-increment: none; border-top: 0; padding-top: 0; }
+    .followup .contact-panel .form-group > label::before { content: none; }
     .existing-app { display: none; }
     .existing-app.visible { display: block; animation: liftIn .35s ease both; }
     .existing-app .field { margin-top: 2px; }
