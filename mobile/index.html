@@ -959,6 +959,14 @@
     }
     .intent-btn:hover { transform: translateY(-2px); border-color: var(--green); }
     .intent-btn.selected { color: white; border-color: var(--green); background: var(--green); }
+    /* 구독 의향: 질문은 크게, 선택지는 가벼운 보기로 */
+    .intent-area { background: var(--cream); }
+    .intent-ask { display: inline-block; margin-bottom: 8px; padding: 4px 11px; border-radius: 999px; background: var(--mint-pale); color: var(--green); font-size: 13px; font-weight: 900; }
+    .intent-area h3 { font-size: 26px; font-weight: 950; }
+    .intent-btn { position: relative; padding-right: 46px; background: #fff; color: var(--ink-2); font-weight: 600; }
+    .intent-btn::after { content: ""; position: absolute; right: 16px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%; border: 2px solid rgba(23,55,47,.25); background: #fff; }
+    .intent-btn.selected { color: #fff; font-weight: 800; }
+    .intent-btn.selected::after { border-color: #fff; background: radial-gradient(circle, var(--green) 0 4px, #fff 5px); }
     .no-charge {
       margin: 22px 0 0;
       color: #6c7e78;
@@ -1657,6 +1665,7 @@
             <p class="price-note">예정 가격이며 바뀔 수 있어요.</p>
           </div>
           <div class="intent-area">
+            <span class="intent-ask">하나만 골라 주세요</span>
             <h3>이 조건이라면, 출시되면 쓰시겠어요?</h3>
             <div class="intent-buttons">
               <button class="intent-btn" data-intent="buy">🙌 네, 필요하면 철통 지킴이도 쓸래요</button>
