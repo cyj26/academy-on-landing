@@ -32,7 +32,6 @@ VIEWS = [
     ("mobile", 390, 844, ".hero"),
     ("mobile", 390, 844, ".story-step.critical"),
     ("mobile", 390, 844, ".benefits"),
-    ("mobile", 390, 844, ".calculator"),
     ("mobile", 390, 844, "#survey"),
     ("desktop", 1280, 800, ".hero"),
     ("desktop", 1280, 800, ".story-step.critical"),

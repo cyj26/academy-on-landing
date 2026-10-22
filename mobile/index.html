@@ -1579,41 +1579,6 @@
       </div>
     </section>
 
-    <section class="calculator">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">우리 아이의 오후, 함께 세어 볼까요?</span>
-          <h2>한 달 동안,<br>아이 혼자 길 위에 있는 시간은?</h2>
-        </div>
-        <div class="calculator-card">
-          <div class="calc-controls">
-            <div class="control-group">
-              <label>하루에 다니는 학원 수 <output id="academyOutput">2곳</output></label>
-              <div class="choice-row" id="academyChoices">
-                <button type="button" class="choice-btn" data-value="1">1곳</button>
-                <button type="button" class="choice-btn active" data-value="2">2곳</button>
-                <button type="button" class="choice-btn" data-value="3">3곳</button>
-                <button type="button" class="choice-btn" data-value="4">4곳+</button>
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="minutes">한 번 이동에 걸리는 시간 <output id="minutesOutput">12분</output></label>
-              <input type="range" id="minutes" min="5" max="30" value="12" />
-            </div>
-            <div class="control-group">
-              <label for="days">일주일에 학원 가는 날 <output id="daysOutput">5일</output></label>
-              <input type="range" id="days" min="1" max="6" value="5" />
-            </div>
-          </div>
-          <div class="calc-result">
-            <span>한 달 동안 아이 혼자 이동하는 시간</span>
-            <strong id="calcResult">12시간 54분</strong>
-            <p>학교에서 첫 학원, 학원 사이, 마지막 학원에서 집까지 모두 더한 시간입니다.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="roadmap">
       <div class="container">
         <div class="section-head">
@@ -1962,38 +1927,6 @@
     });
     pickStoryStep(true);
 
-    let academyCount = 2;
-    const minutesInput = document.getElementById('minutes');
-    const daysInput = document.getElementById('days');
-    const calcResult = document.getElementById('calcResult');
-    const academyOutput = document.getElementById('academyOutput');
-    const minutesOutput = document.getElementById('minutesOutput');
-    const daysOutput = document.getElementById('daysOutput');
-
-    function updateCalc() {
-      const minutes = Number(minutesInput.value);
-      const days = Number(daysInput.value);
-      const totalMinutes = Math.round((academyCount + 1) * minutes * days * 4.3);
-      const hours = Math.floor(totalMinutes / 60);
-      const rest = totalMinutes % 60;
-      academyOutput.textContent = `${academyCount}${academyCount === 4 ? '곳+' : '곳'}`;
-      minutesOutput.textContent = `${minutes}분`;
-      daysOutput.textContent = `${days}일`;
-      calcResult.textContent = `${hours}시간 ${rest}분`;
-    }
-
-    document.getElementById('academyChoices').addEventListener('click', event => {
-      const button = event.target.closest('button');
-      if (!button) return;
-      academyCount = Number(button.dataset.value);
-      document.querySelectorAll('#academyChoices .choice-btn').forEach(item => item.classList.toggle('active', item === button));
-      updateCalc();
-    });
-
-    minutesInput.addEventListener('input', updateCalc);
-    daysInput.addEventListener('input', updateCalc);
-    updateCalc();
-
     // 설문: 페이지 맨 끝 한 곳에서 아이 정보 → 구독 의향 → (조건부 질문) → 연락처
     const PROFILE_KEYS = ['academies_week', 'children', 'grade', 'phone', 'location_app'];
     const followupForm = document.getElementById('followupForm');
@@ -2029,10 +1962,7 @@
       return {
         ...profile,
         existing_app: existing,
-        plan: many || kids ? 'premium' : 'free',
-        academies_day: academyCount === 4 ? '4+' : String(academyCount),
-        move_min: minutesInput.value,
-        days: daysInput.value
+        plan: many || kids ? 'premium' : 'free'
       };
     }
 
