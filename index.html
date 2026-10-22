@@ -1561,7 +1561,7 @@
               <div class="plan premium">
                 <span class="plan-name">🏰 철통 지킴이!</span>
                 <div class="price"><span>월 2,900원</span></div>
-                <p class="plan-who">학원 3곳 이상이거나 자녀가 2명 이상일 때 · <b>첫 달 무료</b></p>
+                <p class="plan-who">학원 3곳 이상 or 자녀가 2명 이상</p>
                 <ul>
                   <li>안전 지킴이 기능 모두</li>
                   <li>학원 수 제한 없이 연결</li>
@@ -1879,7 +1879,7 @@
       const many = profile.academies_week === '3' || profile.academies_week === '4+';
       const kids = profile.children && profile.children !== '1';
       if (!profile.academies_week || !profile.children) return null;
-      if (many || kids) return { plan: 'premium', title: '🏰 철통 지킴이!가 맞아요', text: `${many ? '학원이 3곳 이상' : '자녀가 2명 이상'}이라 철통 지킴이(월 2,900원 예정)가 맞아요. 첫 달은 무료로 써 보실 수 있어요.` };
+      if (many || kids) return { plan: 'premium', title: '🏰 철통 지킴이!가 맞아요', text: `${many ? '학원이 3곳 이상' : '자녀가 2명 이상'}이라 철통 지킴이(월 2,900원 예정)가 맞아요.` };
       return { plan: 'free', title: '🛡️ 안전 지킴이!(무료)로 충분해요', text: '자녀 1명 · 학원 2곳까지는 무료예요. 학원 사이 미도착 확인까지 그대로 쓰실 수 있어요.' };
     }
     function calcSnapshot() {
