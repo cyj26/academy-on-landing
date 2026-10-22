@@ -861,7 +861,7 @@
     .calc-more-title { margin: 0; font-weight: 900; color: var(--ink); }
     .calc-more-title small { display: block; margin-top: 3px; color: var(--ink-2); font-size: 13px; font-weight: 700; }
     .choice-row.three { grid-template-columns: repeat(3, 1fr); }
-    .control-group label output.empty { color: var(--ink-2); font-weight: 700; }
+    .control-group label output.empty { color: var(--red); font-weight: 800; font-size: 13px; }
     .calc-plan {
       display: none;
       margin-top: 22px;
@@ -1549,9 +1549,9 @@
               <input type="range" id="days" min="1" max="6" value="5" />
             </div>
             <div class="calc-more" id="calcMore">
-              <p class="calc-more-title">우리 집에 맞는 요금도 알려 드릴게요<small>다섯 가지만 골라 주세요. 이름이나 연락처는 묻지 않아요.</small></p>
+              <p class="calc-more-title">우리 집에 맞는 요금도 알려 드릴게요<small>다섯 가지는 꼭 골라 주세요. 이름이나 연락처는 묻지 않아요.</small></p>
               <div class="control-group">
-                <label>일주일 동안 다니는 학원은 모두 <output class="empty" data-for="academies_week">선택</output></label>
+                <label>일주일 동안 다니는 학원은 모두 <output class="empty" data-for="academies_week">필수</output></label>
                 <div class="choice-row profile-choices" data-name="academies_week">
                   <button type="button" class="choice-btn" data-value="1">1곳</button>
                   <button type="button" class="choice-btn" data-value="2">2곳</button>
@@ -1560,7 +1560,7 @@
                 </div>
               </div>
               <div class="control-group">
-                <label>학원에 다니는 자녀 <output class="empty" data-for="children">선택</output></label>
+                <label>학원에 다니는 자녀 <output class="empty" data-for="children">필수</output></label>
                 <div class="choice-row three profile-choices" data-name="children">
                   <button type="button" class="choice-btn" data-value="1">1명</button>
                   <button type="button" class="choice-btn" data-value="2">2명</button>
@@ -1568,7 +1568,7 @@
                 </div>
               </div>
               <div class="control-group">
-                <label>아이 학년 (막내 기준) <output class="empty" data-for="grade">선택</output></label>
+                <label>아이 학년 (막내 기준) <output class="empty" data-for="grade">필수</output></label>
                 <div class="choice-row profile-choices" data-name="grade">
                   <button type="button" class="choice-btn" data-value="e1-3">초1~3</button>
                   <button type="button" class="choice-btn" data-value="e4-6">초4~6</button>
@@ -1577,7 +1577,7 @@
                 </div>
               </div>
               <div class="control-group">
-                <label>아이 휴대폰 <output class="empty" data-for="phone">선택</output></label>
+                <label>아이 휴대폰 <output class="empty" data-for="phone">필수</output></label>
                 <div class="choice-row three profile-choices" data-name="phone">
                   <button type="button" class="choice-btn" data-value="smart">스마트폰</button>
                   <button type="button" class="choice-btn" data-value="kids">키즈폰</button>
@@ -1585,7 +1585,7 @@
                 </div>
               </div>
               <div class="control-group">
-                <label>아이 위치 확인 앱 <output class="empty" data-for="location_app">선택</output></label>
+                <label>아이 위치 확인 앱 <output class="empty" data-for="location_app">필수</output></label>
                 <div class="choice-row three profile-choices" data-name="location_app">
                   <button type="button" class="choice-btn" data-value="using">쓰고 있어요</button>
                   <button type="button" class="choice-btn" data-value="used">써 봤어요</button>
@@ -1593,8 +1593,15 @@
                 </div>
               </div>
               <div class="control-group existing-app" id="existingAppCalc">
-                <label for="existingAppInput">쓰는(썼던) 앱과 한 달 요금 <output class="empty">선택 입력</output></label>
-                <input class="field" id="existingAppInput" maxlength="80" placeholder="예: ○○ 위치앱 월 3,300원 / 학원 알림 무료" />
+                <label>쓰는(썼던) 앱의 한 달 요금 (선택) <output class="empty" id="existingPriceOut"></output></label>
+                <div class="choice-row" id="existingPriceCalc">
+                  <button type="button" class="choice-btn" data-value="무료">무료</button>
+                  <button type="button" class="choice-btn" data-value="월 3천원 미만">월 3천원 미만</button>
+                  <button type="button" class="choice-btn" data-value="월 3천~5천원">월 3천~5천원</button>
+                  <button type="button" class="choice-btn" data-value="월 5천~1만원">월 5천~1만원</button>
+                  <button type="button" class="choice-btn" data-value="월 1만원 이상">월 1만원 이상</button>
+                </div>
+                <input class="field" id="existingAppInput" maxlength="40" placeholder="앱 이름 (선택)" style="margin-top:8px" />
               </div>
               <button type="button" class="btn btn-primary calc-save" id="calcSaveBtn">우리 집 요금 확인하기</button>
             </div>
@@ -1735,8 +1742,15 @@
           </div>
 
           <div class="form-group existing-app" id="existingAppForm">
-            <label for="existingAppFormInput">쓰는(썼던) 앱과 한 달 요금 <small>(선택)</small></label>
-            <input class="field" id="existingAppFormInput" name="existing_app" maxlength="80" placeholder="예: ○○ 위치앱 월 3,300원 / 학원 알림 무료" />
+            <label>쓰는(썼던) 앱의 한 달 요금 <small>(선택)</small></label>
+            <div class="option-grid">
+              <label><input type="radio" name="existing_app_price" value="무료"><span>무료</span></label>
+              <label><input type="radio" name="existing_app_price" value="월 3천원 미만"><span>월 3천원 미만</span></label>
+              <label><input type="radio" name="existing_app_price" value="월 3천~5천원"><span>월 3천~5천원</span></label>
+              <label><input type="radio" name="existing_app_price" value="월 5천~1만원"><span>월 5천~1만원</span></label>
+              <label><input type="radio" name="existing_app_price" value="월 1만원 이상"><span>월 1만원 이상</span></label>
+            </div>
+            <input class="field" id="existingAppFormInput" maxlength="40" placeholder="앱 이름 (선택)" style="margin-top:10px" />
           </div>
 
           <div class="form-actions">
@@ -1985,14 +1999,29 @@
         if (name === 'location_app') document.getElementById('existingAppCalc').classList.toggle('visible', button.dataset.value !== 'never');
       });
     });
+    // 기존 앱 요금(선택) + 앱 이름(선택) → existing_app 한 칸에 "요금 / 이름"으로 기록
     state.existingApp = '';
-    function syncExistingApp(value) {
-      state.existingApp = value.trim().slice(0, 80);
-      document.getElementById('existingAppInput').value = value;
-      document.getElementById('existingAppFormInput').value = value;
+    state.existingPrice = '';
+    state.existingName = '';
+    function syncExistingApp() {
+      const name = state.existingName.trim().slice(0, 40);
+      state.existingApp = [state.existingPrice, name].filter(Boolean).join(' / ');
+      document.getElementById('existingAppInput').value = state.existingName;
+      document.getElementById('existingAppFormInput').value = state.existingName;
+      const out = document.getElementById('existingPriceOut');
+      out.textContent = state.existingPrice || '';
+      out.classList.toggle('empty', !state.existingPrice);
+      document.querySelectorAll('#existingPriceCalc .choice-btn').forEach(b => b.classList.toggle('active', b.dataset.value === state.existingPrice));
+      document.querySelectorAll('#followupForm input[name="existing_app_price"]').forEach(i => { i.checked = i.value === state.existingPrice; });
     }
-    document.getElementById('existingAppInput').addEventListener('input', e => { syncExistingApp(e.target.value); state.calcSaved = false; });
-    document.getElementById('existingAppFormInput').addEventListener('input', e => syncExistingApp(e.target.value));
+    document.getElementById('existingPriceCalc').addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      state.existingPrice = state.existingPrice === b.dataset.value ? '' : b.dataset.value;
+      state.calcSaved = false; syncExistingApp();
+    });
+    document.querySelectorAll('#followupForm input[name="existing_app_price"]').forEach(i => i.addEventListener('change', () => { state.existingPrice = i.value; syncExistingApp(); }));
+    document.getElementById('existingAppInput').addEventListener('input', e => { state.existingName = e.target.value; state.calcSaved = false; syncExistingApp(); });
+    document.getElementById('existingAppFormInput').addEventListener('input', e => { state.existingName = e.target.value; syncExistingApp(); });
     document.querySelectorAll('#followupForm input[name="location_app"]').forEach(input => {
       input.addEventListener('change', () => document.getElementById('existingAppForm').classList.toggle('visible', input.value !== 'never'));
     });
