@@ -8,4 +8,6 @@
    - 액세스 권한: 모든 사용자
 5. 발급된 웹 앱 URL(`https://script.google.com/macros/s/.../exec`)을 `index.html`의 `FORM_ENDPOINT`에 넣고 push한다.
 
-응답은 시트의 "학부모", "학원" 탭에 자동으로 쌓인다.
+응답은 시트의 "우리집요금", "구매의향", "상세응답", "연락처", "학원" 탭에 자동으로 쌓인다. 탭은 첫 응답이 들어올 때 만들어진다.
+
+`index.html`과 `mobile/index.html` 두 파일 모두 `FORM_ENDPOINT`를 넣어야 한다.

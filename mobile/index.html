@@ -848,6 +848,26 @@
       letter-spacing: -.06em;
     }
     .calc-result p { margin: 0; max-width: 310px; color: rgba(255,255,255,.8); line-height: 1.6; }
+    .calc-more { display: grid; gap: 22px; padding-top: 26px; border-top: 1px dashed rgba(116,87,19,.22); }
+    .calc-more-title { margin: 0; font-weight: 900; color: var(--ink); }
+    .calc-more-title small { display: block; margin-top: 3px; color: var(--ink-2); font-size: 13px; font-weight: 700; }
+    .choice-row.three { grid-template-columns: repeat(3, 1fr); }
+    .control-group label output.empty { color: var(--ink-2); font-weight: 700; }
+    .calc-plan {
+      display: none;
+      margin-top: 22px;
+      width: 100%;
+      max-width: 330px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.14);
+      text-align: left;
+    }
+    .calc-plan.visible { display: block; animation: liftIn .45s ease both; }
+    .calc-plan b { display: block; color: var(--yellow); font-size: 18px; letter-spacing: -.03em; }
+    .calc-plan em { display: block; margin-top: 4px; color: rgba(255,255,255,.86); font-size: 13.5px; font-style: normal; line-height: 1.55; }
+    .calc-plan a { display: inline-block; margin-top: 10px; color: white; font-weight: 850; font-size: 14px; }
+    .calc-save { margin-top: 4px; min-height: 52px; }
 
     .survey {
       padding: 130px 0;
@@ -1480,10 +1500,10 @@
             <div class="control-group">
               <label>하루에 다니는 학원 수 <output id="academyOutput">2곳</output></label>
               <div class="choice-row" id="academyChoices">
-                <button class="choice-btn" data-value="1">1곳</button>
-                <button class="choice-btn active" data-value="2">2곳</button>
-                <button class="choice-btn" data-value="3">3곳</button>
-                <button class="choice-btn" data-value="4">4곳+</button>
+                <button type="button" class="choice-btn" data-value="1">1곳</button>
+                <button type="button" class="choice-btn active" data-value="2">2곳</button>
+                <button type="button" class="choice-btn" data-value="3">3곳</button>
+                <button type="button" class="choice-btn" data-value="4">4곳+</button>
               </div>
             </div>
             <div class="control-group">
@@ -1494,11 +1514,62 @@
               <label for="days">일주일에 학원 가는 날 <output id="daysOutput">5일</output></label>
               <input type="range" id="days" min="1" max="6" value="5" />
             </div>
+            <div class="calc-more" id="calcMore">
+              <p class="calc-more-title">우리 집에 맞는 요금도 알려 드릴게요<small>다섯 가지만 골라 주세요. 이름이나 연락처는 묻지 않아요.</small></p>
+              <div class="control-group">
+                <label>일주일 동안 다니는 학원은 모두 <output class="empty" data-for="academies_week">선택</output></label>
+                <div class="choice-row profile-choices" data-name="academies_week">
+                  <button type="button" class="choice-btn" data-value="1">1곳</button>
+                  <button type="button" class="choice-btn" data-value="2">2곳</button>
+                  <button type="button" class="choice-btn" data-value="3">3곳</button>
+                  <button type="button" class="choice-btn" data-value="4+">4곳+</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label>학원에 다니는 자녀 <output class="empty" data-for="children">선택</output></label>
+                <div class="choice-row three profile-choices" data-name="children">
+                  <button type="button" class="choice-btn" data-value="1">1명</button>
+                  <button type="button" class="choice-btn" data-value="2">2명</button>
+                  <button type="button" class="choice-btn" data-value="3+">3명+</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label>아이 학년 (막내 기준) <output class="empty" data-for="grade">선택</output></label>
+                <div class="choice-row profile-choices" data-name="grade">
+                  <button type="button" class="choice-btn" data-value="1-2">초1~2</button>
+                  <button type="button" class="choice-btn" data-value="3-4">초3~4</button>
+                  <button type="button" class="choice-btn" data-value="5-6">초5~6</button>
+                  <button type="button" class="choice-btn" data-value="other">그 외</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label>아이 휴대폰 <output class="empty" data-for="phone">선택</output></label>
+                <div class="choice-row three profile-choices" data-name="phone">
+                  <button type="button" class="choice-btn" data-value="smart">스마트폰</button>
+                  <button type="button" class="choice-btn" data-value="kids">키즈폰</button>
+                  <button type="button" class="choice-btn" data-value="none">없음</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label>아이 위치 확인 앱 <output class="empty" data-for="location_app">선택</output></label>
+                <div class="choice-row three profile-choices" data-name="location_app">
+                  <button type="button" class="choice-btn" data-value="using">쓰고 있어요</button>
+                  <button type="button" class="choice-btn" data-value="used">써 봤어요</button>
+                  <button type="button" class="choice-btn" data-value="never">안 써요</button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary calc-save" id="calcSaveBtn">우리 집 요금 확인하기</button>
+            </div>
           </div>
           <div class="calc-result">
             <span>한 달 동안 아이가 이동하는 시간</span>
             <strong id="calcResult">12시간 54분</strong>
             <p>학교에서 첫 학원, 학원 사이, 마지막 학원에서 집까지 모두 더한 시간입니다.</p>
+            <div class="calc-plan" id="calcPlan" aria-live="polite">
+              <b id="calcPlanTitle"></b>
+              <em id="calcPlanText"></em>
+              <a href="#survey">이 조건이라면 쓰실까요? 의견 남기기 →</a>
+            </div>
           </div>
         </div>
       </div>
@@ -1514,9 +1585,9 @@
 
         <div class="price-card">
           <div class="price-top">
-            <span class="price-label">출시 예정 · Academy ON 안심 플랜</span>
-            <div class="price"><span>월 2,900원</span><small>/ 아이 1명</small></div>
-            <p>하루 약 100원 · 예정 가격이며 바뀔 수 있어요</p>
+            <span class="price-label">출시 예정 · Academy ON 요금</span>
+            <div class="price"><span>기본 무료</span><small>/ 자녀 1명 · 학원 2곳까지</small></div>
+            <p>학원 3곳 이상이거나 자녀가 2명 이상이면 안심 플랜 월 2,900원 · 첫 달 무료 · 예정 가격이며 바뀔 수 있어요</p>
           </div>
           <div class="price-features">
             <span>하교부터 집까지 통합 타임라인</span>
@@ -1525,11 +1596,11 @@
             <span>가입 안 한 학원도 문자로 확인</span>
           </div>
           <div class="intent-area">
-            <h3>이 가격이라면, 출시되면 쓰시겠어요?</h3>
+            <h3>이 조건이라면, 출시되면 쓰시겠어요?</h3>
             <div class="intent-buttons">
-              <button class="intent-btn" data-intent="buy">🙌 네, 바로 쓸래요</button>
-              <button class="intent-btn" data-intent="cheaper">🤔 더 저렴하면 쓸래요</button>
-              <button class="intent-btn" data-intent="free">🆓 무료라면 써 볼래요</button>
+              <button class="intent-btn" data-intent="buy">🙌 네, 필요하면 유료도 쓸래요</button>
+              <button class="intent-btn" data-intent="cheaper">🤔 안심 플랜이 더 저렴하면 쓸래요</button>
+              <button class="intent-btn" data-intent="free">🆓 무료 범위에서만 써 볼래요</button>
               <button class="intent-btn" data-intent="no">🙅 필요 없을 것 같아요</button>
             </div>
             <p class="no-charge">지금은 결제되지 않으며, 버튼을 누르면 구매 의향만 기록됩니다.</p>
@@ -1561,33 +1632,51 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label>평일에 아이가 다니는 학원 수</label>
+          <div class="form-group profile-q" data-name="academies_week">
+            <label>일주일 동안 아이가 다니는 학원 수</label>
             <div class="option-grid">
-              <label><input type="radio" required name="academies" value="0"><span>없음</span></label>
-              <label><input type="radio" name="academies" value="1"><span>1곳</span></label>
-              <label><input type="radio" name="academies" value="2"><span>2곳</span></label>
-              <label><input type="radio" name="academies" value="3"><span>3곳</span></label>
-              <label><input type="radio" name="academies" value="4+"><span>4곳 이상</span></label>
+              <label><input type="radio" name="academies_week" value="0"><span>없음</span></label>
+              <label><input type="radio" name="academies_week" value="1"><span>1곳</span></label>
+              <label><input type="radio" name="academies_week" value="2"><span>2곳</span></label>
+              <label><input type="radio" name="academies_week" value="3"><span>3곳</span></label>
+              <label><input type="radio" name="academies_week" value="4+"><span>4곳 이상</span></label>
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group profile-q" data-name="children">
+            <label>학원에 다니는 자녀</label>
+            <div class="option-grid">
+              <label><input type="radio" name="children" value="1"><span>1명</span></label>
+              <label><input type="radio" name="children" value="2"><span>2명</span></label>
+              <label><input type="radio" name="children" value="3+"><span>3명 이상</span></label>
+            </div>
+          </div>
+
+          <div class="form-group profile-q" data-name="grade">
             <label>아이 학년</label>
             <div class="option-grid">
-              <label><input type="radio" required name="grade" value="1-2"><span>초1~2</span></label>
+              <label><input type="radio" name="grade" value="1-2"><span>초1~2</span></label>
               <label><input type="radio" name="grade" value="3-4"><span>초3~4</span></label>
               <label><input type="radio" name="grade" value="5-6"><span>초5~6</span></label>
               <label><input type="radio" name="grade" value="other"><span>그 외</span></label>
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group profile-q" data-name="phone">
             <label>아이 휴대폰</label>
             <div class="option-grid">
-              <label><input type="radio" required name="phone" value="smart"><span>스마트폰</span></label>
+              <label><input type="radio" name="phone" value="smart"><span>스마트폰</span></label>
               <label><input type="radio" name="phone" value="kids"><span>키즈폰</span></label>
               <label><input type="radio" name="phone" value="none"><span>없음</span></label>
+            </div>
+          </div>
+
+          <div class="form-group profile-q" data-name="location_app">
+            <label>아이 위치 확인 앱</label>
+            <div class="option-grid">
+              <label><input type="radio" name="location_app" value="using"><span>쓰고 있어요</span></label>
+              <label><input type="radio" name="location_app" value="used"><span>써 봤어요</span></label>
+              <label><input type="radio" name="location_app" value="never"><span>안 써요</span></label>
             </div>
           </div>
 
@@ -1669,7 +1758,7 @@
 
   <script>
     const FORM_ENDPOINT = '';
-    const state = { intent: '', visitorId: '', detail: null };
+    const state = { intent: '', visitorId: '', detail: null, profile: {}, calcSaved: false };
 
     function getVisitorId() {
       let id = localStorage.getItem('academyOnVisitorId');
@@ -1698,7 +1787,8 @@
       saved.push(item);
       localStorage.setItem('academyOnResponses', JSON.stringify(saved));
       if (FORM_ENDPOINT) {
-        try { await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(item) }); }
+        // Apps Script 웹 앱은 CORS 사전요청을 받지 않으므로 text/plain + no-cors로 보낸다.
+        try { await fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(item) }); }
         catch (error) { console.warn('응답 전송 실패, 브라우저에 보관했습니다.', error); }
       }
     }
@@ -1797,8 +1887,52 @@
       const button = event.target.closest('button');
       if (!button) return;
       academyCount = Number(button.dataset.value);
-      document.querySelectorAll('.choice-btn').forEach(item => item.classList.toggle('active', item === button));
+      document.querySelectorAll('#academyChoices .choice-btn').forEach(item => item.classList.toggle('active', item === button));
       updateCalc();
+    });
+
+    // 우리 집 요금: 계산기 아래 네 가지 질문 (설문 응답으로 함께 기록)
+    const PROFILE_KEYS = ['academies_week', 'children', 'grade', 'phone', 'location_app'];
+    const calcPlan = document.getElementById('calcPlan');
+    function planFor(profile) {
+      const many = profile.academies_week === '3' || profile.academies_week === '4+';
+      const kids = profile.children && profile.children !== '1';
+      if (!profile.academies_week || !profile.children) return null;
+      if (many || kids) return { plan: 'premium', title: '안심 플랜 대상이에요', text: `${many ? '학원이 3곳 이상' : '자녀가 2명 이상'}이라 안심 플랜(월 2,900원 예정)이 맞아요. 첫 달은 무료로 써 보실 수 있어요.` };
+      return { plan: 'free', title: '기본 무료로 쓸 수 있어요', text: '자녀 1명 · 학원 2곳까지는 무료예요. 학원 사이 미도착 확인까지 그대로 쓰실 수 있어요.' };
+    }
+    function calcSnapshot() {
+      const p = planFor(state.profile);
+      return {
+        ...state.profile,
+        plan: p ? p.plan : '',
+        academies_day: academyCount === 4 ? '4+' : String(academyCount),
+        move_min: minutesInput.value,
+        days: daysInput.value
+      };
+    }
+    document.querySelectorAll('.profile-choices').forEach(group => {
+      group.addEventListener('click', event => {
+        const button = event.target.closest('button');
+        if (!button) return;
+        const name = group.dataset.name;
+        state.profile[name] = button.dataset.value;
+        group.querySelectorAll('.choice-btn').forEach(item => item.classList.toggle('active', item === button));
+        const out = document.querySelector(`output[data-for="${name}"]`);
+        out.textContent = button.textContent;
+        out.classList.remove('empty');
+        state.calcSaved = false;
+      });
+    });
+    document.getElementById('calcSaveBtn').addEventListener('click', () => {
+      const missing = PROFILE_KEYS.filter(key => !state.profile[key]);
+      if (missing.length) { showToast(`${missing.length}개 항목을 더 골라 주세요.`); return; }
+      const p = planFor(state.profile);
+      document.getElementById('calcPlanTitle').textContent = p.title;
+      document.getElementById('calcPlanText').textContent = p.text;
+      calcPlan.classList.add('visible');
+      if (!state.calcSaved) { record('calc', calcSnapshot()); state.calcSaved = true; }
+      calcPlan.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
     minutesInput.addEventListener('input', updateCalc);
     daysInput.addEventListener('input', updateCalc);
@@ -1822,7 +1956,12 @@
         contactPanel.classList.remove('visible');
         successPanel.classList.remove('visible');
         contactTitle.textContent = state.intent === 'no' ? '나중에 생각이 바뀌시면 알려 드릴까요?' : '출시되면 가장 먼저 알려 드릴까요?';
-        record('intent', { intent: state.intent });
+        record('intent', { intent: state.intent, ...calcSnapshot() });
+        // 계산기에서 이미 답한 질문은 다시 묻지 않는다.
+        document.querySelectorAll('.profile-q').forEach(group => {
+          const answered = Boolean(state.profile[group.dataset.name]);
+          group.style.display = answered ? 'none' : '';
+        });
         setTimeout(() => followupForm.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
       });
     });
@@ -1831,13 +1970,14 @@
       event.preventDefault();
       if (!state.intent) return;
       const formData = new FormData(followupForm);
+      const missing = PROFILE_KEYS.filter(key => !state.profile[key] && !formData.get(key));
+      if (missing.length) { showToast('아이에 대한 질문에 답해 주세요.'); return; }
+      PROFILE_KEYS.forEach(key => { if (!state.profile[key]) state.profile[key] = formData.get(key); });
       const detail = {
         intent: state.intent,
         wish_price: formData.get('wish_price') || '',
-        reason: formData.getAll('reason'),
-        academies: formData.get('academies') || '',
-        grade: formData.get('grade') || '',
-        phone: formData.get('phone') || ''
+        reason: formData.getAll('reason').join(', '),
+        ...calcSnapshot()
       };
       state.detail = detail;
       record('detail', detail);
