@@ -802,6 +802,36 @@
     .benefit p { margin: 0; color: var(--ink-2); line-height: 1.65; }
     .benefit.featured p { color: rgba(255,255,255,.73); font-size: 17px; }
 
+    .roadmap { padding: 120px 0; background: #f2faf6; }
+    .roadmap .section-head p { margin: 14px 0 0; color: var(--ink-2); line-height: 1.65; }
+    .road { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 8px; }
+    .road::before { content: ""; position: absolute; left: 4%; right: 4%; top: 27px; height: 2px; background: repeating-linear-gradient(90deg, var(--green) 0 8px, transparent 8px 16px); opacity: .35; }
+    .stop { position: relative; display: flex; flex-direction: column; }
+    .stop-when { align-self: flex-start; position: relative; z-index: 1; padding: 7px 13px; border-radius: 999px; background: #fff; border: 1.5px solid rgba(18,133,111,.35); color: var(--green); font-size: 13px; font-weight: 900; }
+    .stop-card { flex: 1; margin-top: 14px; padding: 24px 20px; border-radius: 24px; background: #fff; border: 1px solid var(--line); }
+    .stop-card .ic { font-size: 28px; }
+    .stop-card h3 { margin: 14px 0 8px; font-size: 18px; letter-spacing: -.035em; line-height: 1.35; }
+    .stop-card p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.6; }
+    .stop.now .stop-when { background: var(--green); border-color: var(--green); color: #fff; }
+    .stop.now .stop-card { background: #103d34; border-color: #103d34; color: #fff; }
+    .stop.now .stop-card p { color: rgba(255,255,255,.75); }
+    .stop.now .stop-card h3 { color: var(--yellow); }
+    .pledge { display: flex; align-items: center; gap: 12px; margin-top: 26px; padding: 18px 22px; border-radius: 18px; background: var(--mint-pale); color: var(--ink); font-weight: 800; }
+    .pledge span { font-size: 22px; }
+    @media (max-width: 920px) {
+      .road { grid-template-columns: 1fr; gap: 0; }
+      .road::before { left: 27px; right: auto; top: 10px; bottom: 10px; width: 2px; height: auto; background: repeating-linear-gradient(180deg, var(--green) 0 8px, transparent 8px 16px); }
+      .stop { display: grid; grid-template-columns: 66px 1fr; align-items: start; padding-bottom: 14px; }
+      .stop-when { align-self: start; justify-self: start; padding: 6px 9px; font-size: 12px; margin-top: 10px; }
+      .stop-card { margin-top: 0; padding: 18px; }
+      .stop-card .ic { font-size: 24px; float: left; margin-right: 10px; }
+      .stop-card h3 { margin: 0 0 8px; font-size: 17px; }
+    }
+    @media (max-width: 620px) {
+      .roadmap { padding: 56px 0; }
+      .pledge { font-size: 14.5px; padding: 15px 16px; }
+    }
+
     .calculator {
       padding: 125px 0;
       background: #fff2c9;
@@ -1450,6 +1480,24 @@
           <article class="benefit"><span class="benefit-icon">🤝</span><h3>감시가 아니라 안심</h3><p>GPS를 따라다니지 않고 들어갔다, 나왔다만 기록합니다.</p></article>
           <article class="benefit"><span class="benefit-icon">🏫</span><h3>학원 가입 없이도 확인</h3><p>원장님은 문자 버튼 하나로 도착 여부만 답할 수 있어요.</p></article>
         </div>
+      </div>
+    </section>
+
+    <section class="roadmap">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">출결은 시작일 뿐이에요</span>
+          <h2>아이의 오후를 지키는 일,<br>여기서 더 넓어집니다</h2>
+          <p>학원마다 흩어진 앱과 연락을 하나로 모으는 것부터 시작해, 아이의 오후 전체를 함께 챙기는 곳으로 자라 갑니다.</p>
+        </div>
+        <div class="road">
+          <div class="stop now"><span class="stop-when">지금</span><div class="stop-card"><span class="ic">🛡️</span><h3>출결 안심</h3><p>학원이 몇 곳이든 하나의 타임라인. 위치는 보지 않고 도착만 확인해요.</p></div></div>
+          <div class="stop"><span class="stop-when">다음</span><div class="stop-card"><span class="ic">💬</span><h3>학원 소통·결제를 한곳에</h3><p>알림장, 상담 기록, 수강료 결제까지. 학원마다 다른 앱을 따로 열지 않아도 돼요.</p></div></div>
+          <div class="stop"><span class="stop-when">그다음</span><div class="stop-card"><span class="ic">🗺️</span><h3>우리 동네 학원 정보</h3><p>시간표와 셔틀 동선을 한눈에. 원장님이 직접 올리는 정보로 우리 아이 동선에 맞는 학원을 찾아요.</p></div></div>
+          <div class="stop"><span class="stop-when">그리고</span><div class="stop-card"><span class="ic">🏊</span><h3>함께하는 단체 프로그램</h3><p>방학 수영·스키 캠프처럼 검증된 단체 프로그램을 같은 동네 친구들과 함께 신청해요.</p></div></div>
+          <div class="stop"><span class="stop-when">언젠가</span><div class="stop-card"><span class="ic">✨</span><h3>AI 오후 도우미</h3><p>아이의 이동 기록으로 알맞은 미도착 기준을 제안하고, 시간표에 맞는 프로그램을 추천해요.</p></div></div>
+        </div>
+        <div class="pledge"><span>🤝</span>어떤 기능이 늘어나도, 아이의 위치는 수집하지 않습니다.</div>
       </div>
     </section>
 
