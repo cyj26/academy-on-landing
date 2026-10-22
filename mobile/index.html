@@ -3,6 +3,15 @@
 <head>
   <!-- Academy ON 공유용 단일 파일: 이미지가 HTML 안에 포함되어 있습니다. -->
   <meta charset="utf-8" />
+  <script>
+    // PC에서 모바일 주소를 열면 PC 버전으로 보낸다. (?view=mobile 을 붙이면 모바일 버전 고정)
+    (function () {
+      if (/[?&]view=mobile/.test(location.search)) return;
+      var phone = /Android|iPhone|iPod|Mobile|SamsungBrowser|KAKAOTALK/i.test(navigator.userAgent);
+      var wide = window.matchMedia && window.matchMedia('(min-width: 921px)').matches;
+      if (!phone && wide) location.replace('../' + location.search + location.hash);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description" content="하교부터 집까지 아이의 오후를 이어 보는 안심 출결 서비스, Academy ON" />
   <meta name="theme-color" content="#fff8e8" />
