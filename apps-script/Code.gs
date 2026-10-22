@@ -7,7 +7,7 @@
  */
 const META = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'referrer'];
 // 계산기 아래 '우리 집 요금' 질문과 계산기 값
-const PROFILE = ['academies_week', 'children', 'grade', 'phone', 'location_app', 'plan', 'academies_day', 'move_min', 'days'];
+const PROFILE = ['academies_week', 'children', 'grade', 'phone', 'location_app', 'existing_app', 'plan', 'academies_day', 'move_min', 'days'];
 const SHEETS = {
   calc:    { name: '우리집요금', cols: ['submittedAt', 'id', ...PROFILE, ...META] },
   intent:  { name: '구매의향',   cols: ['submittedAt', 'id', 'intent', ...PROFILE, ...META] },

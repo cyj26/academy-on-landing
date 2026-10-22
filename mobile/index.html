@@ -868,6 +868,31 @@
     .calc-plan em { display: block; margin-top: 4px; color: rgba(255,255,255,.86); font-size: 13.5px; font-style: normal; line-height: 1.55; }
     .calc-plan a { display: inline-block; margin-top: 10px; color: white; font-weight: 850; font-size: 14px; }
     .calc-save { margin-top: 4px; min-height: 52px; }
+    .existing-app { display: none; }
+    .existing-app.visible { display: block; animation: liftIn .35s ease both; }
+    .existing-app .field { margin-top: 2px; }
+    .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+    .plan {
+      padding: 22px 22px 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .plan.premium { background: rgba(255,216,95,.1); border-color: rgba(255,216,95,.45); }
+    .plan-name { display: block; font-size: 19px; font-weight: 950; letter-spacing: -.04em; color: var(--mint); }
+    .plan.premium .plan-name { color: var(--yellow); }
+    .plan .price { margin: 8px 0 4px; font-size: 40px; }
+    .plan .price small { font-size: 15px; }
+    .plan-who { margin: 0 0 14px; color: rgba(255,255,255,.72); font-size: 14px; line-height: 1.5; }
+    .plan ul { list-style: none; margin: 0; padding: 14px 0 0; display: grid; gap: 7px; border-top: 1px solid rgba(255,255,255,.14); }
+    .plan li { font-size: 14px; font-weight: 700; color: rgba(255,255,255,.92); }
+    .plan li::before { content: "✓"; margin-right: 8px; color: var(--mint); font-weight: 950; }
+    .plan.premium li::before { color: var(--yellow); }
+    .price-note { margin: 14px 0 0; color: rgba(255,255,255,.6); font-size: 13px; }
+    @media (max-width: 620px) {
+      .plans { grid-template-columns: 1fr; }
+      .plan .price { font-size: 34px; }
+    }
 
     .survey {
       padding: 130px 0;
@@ -1536,10 +1561,10 @@
               <div class="control-group">
                 <label>아이 학년 (막내 기준) <output class="empty" data-for="grade">선택</output></label>
                 <div class="choice-row profile-choices" data-name="grade">
-                  <button type="button" class="choice-btn" data-value="1-2">초1~2</button>
-                  <button type="button" class="choice-btn" data-value="3-4">초3~4</button>
-                  <button type="button" class="choice-btn" data-value="5-6">초5~6</button>
-                  <button type="button" class="choice-btn" data-value="other">그 외</button>
+                  <button type="button" class="choice-btn" data-value="e1-3">초1~3</button>
+                  <button type="button" class="choice-btn" data-value="e4-6">초4~6</button>
+                  <button type="button" class="choice-btn" data-value="middle">중학생</button>
+                  <button type="button" class="choice-btn" data-value="high">고등학생</button>
                 </div>
               </div>
               <div class="control-group">
@@ -1558,6 +1583,10 @@
                   <button type="button" class="choice-btn" data-value="never">안 써요</button>
                 </div>
               </div>
+              <div class="control-group existing-app" id="existingAppCalc">
+                <label for="existingAppInput">쓰는(썼던) 앱과 한 달 요금 <output class="empty">선택 입력</output></label>
+                <input class="field" id="existingAppInput" maxlength="80" placeholder="예: ○○ 위치앱 월 3,300원 / 학원 알림 무료" />
+              </div>
               <button type="button" class="btn btn-primary calc-save" id="calcSaveBtn">우리 집 요금 확인하기</button>
             </div>
           </div>
@@ -1568,7 +1597,7 @@
             <div class="calc-plan" id="calcPlan" aria-live="polite">
               <b id="calcPlanTitle"></b>
               <em id="calcPlanText"></em>
-              <a href="#survey">이 조건이라면 쓰실까요? 의견 남기기 →</a>
+              <a href="#survey">두 요금제를 보고 의견 남기기 →</a>
             </div>
           </div>
         </div>
@@ -1586,21 +1615,37 @@
         <div class="price-card">
           <div class="price-top">
             <span class="price-label">출시 예정 · Academy ON 요금</span>
-            <div class="price"><span>기본 무료</span><small>/ 자녀 1명 · 학원 2곳까지</small></div>
-            <p>학원 3곳 이상이거나 자녀가 2명 이상이면 안심 플랜 월 2,900원 · 첫 달 무료 · 예정 가격이며 바뀔 수 있어요</p>
-          </div>
-          <div class="price-features">
-            <span>하교부터 집까지 통합 타임라인</span>
-            <span>학원 사이 미도착 확인</span>
-            <span>미도착 기준 직접 조정</span>
-            <span>가입 안 한 학원도 문자로 확인</span>
+            <div class="plans">
+              <div class="plan">
+                <span class="plan-name">🛡️ 안전 지킴이!</span>
+                <div class="price"><span>무료</span></div>
+                <p class="plan-who">자녀 1명 · 학원 2곳까지</p>
+                <ul>
+                  <li>하교부터 집까지 통합 타임라인</li>
+                  <li>학원 사이 미도착 확인</li>
+                  <li>미도착 기준 직접 조정</li>
+                  <li>가입 안 한 학원도 문자로 확인</li>
+                </ul>
+              </div>
+              <div class="plan premium">
+                <span class="plan-name">🏰 철통 지킴이!</span>
+                <div class="price"><span>월 2,900원</span></div>
+                <p class="plan-who">학원 3곳 이상이거나 자녀가 2명 이상일 때 · <b>첫 달 무료</b></p>
+                <ul>
+                  <li>안전 지킴이 기능 모두</li>
+                  <li>학원 수 제한 없이 연결</li>
+                  <li>자녀 여러 명을 한 화면에서</li>
+                </ul>
+              </div>
+            </div>
+            <p class="price-note">예정 가격이며 바뀔 수 있어요.</p>
           </div>
           <div class="intent-area">
             <h3>이 조건이라면, 출시되면 쓰시겠어요?</h3>
             <div class="intent-buttons">
-              <button class="intent-btn" data-intent="buy">🙌 네, 필요하면 유료도 쓸래요</button>
-              <button class="intent-btn" data-intent="cheaper">🤔 안심 플랜이 더 저렴하면 쓸래요</button>
-              <button class="intent-btn" data-intent="free">🆓 무료 범위에서만 써 볼래요</button>
+              <button class="intent-btn" data-intent="buy">🙌 네, 필요하면 철통 지킴이도 쓸래요</button>
+              <button class="intent-btn" data-intent="cheaper">🤔 철통 지킴이가 더 저렴하면 쓸래요</button>
+              <button class="intent-btn" data-intent="free">🛡️ 안전 지킴이(무료)만 써 볼래요</button>
               <button class="intent-btn" data-intent="no">🙅 필요 없을 것 같아요</button>
             </div>
             <p class="no-charge">지금은 결제되지 않으며, 버튼을 누르면 구매 의향만 기록됩니다.</p>
@@ -1655,10 +1700,10 @@
           <div class="form-group profile-q" data-name="grade">
             <label>아이 학년</label>
             <div class="option-grid">
-              <label><input type="radio" name="grade" value="1-2"><span>초1~2</span></label>
-              <label><input type="radio" name="grade" value="3-4"><span>초3~4</span></label>
-              <label><input type="radio" name="grade" value="5-6"><span>초5~6</span></label>
-              <label><input type="radio" name="grade" value="other"><span>그 외</span></label>
+              <label><input type="radio" name="grade" value="e1-3"><span>초1~3</span></label>
+              <label><input type="radio" name="grade" value="e4-6"><span>초4~6</span></label>
+              <label><input type="radio" name="grade" value="middle"><span>중학생</span></label>
+              <label><input type="radio" name="grade" value="high"><span>고등학생</span></label>
             </div>
           </div>
 
@@ -1678,6 +1723,11 @@
               <label><input type="radio" name="location_app" value="used"><span>써 봤어요</span></label>
               <label><input type="radio" name="location_app" value="never"><span>안 써요</span></label>
             </div>
+          </div>
+
+          <div class="form-group existing-app" id="existingAppForm">
+            <label for="existingAppFormInput">쓰는(썼던) 앱과 한 달 요금 <small>(선택)</small></label>
+            <input class="field" id="existingAppFormInput" name="existing_app" maxlength="80" placeholder="예: ○○ 위치앱 월 3,300원 / 학원 알림 무료" />
           </div>
 
           <div class="form-actions">
@@ -1898,13 +1948,14 @@
       const many = profile.academies_week === '3' || profile.academies_week === '4+';
       const kids = profile.children && profile.children !== '1';
       if (!profile.academies_week || !profile.children) return null;
-      if (many || kids) return { plan: 'premium', title: '안심 플랜 대상이에요', text: `${many ? '학원이 3곳 이상' : '자녀가 2명 이상'}이라 안심 플랜(월 2,900원 예정)이 맞아요. 첫 달은 무료로 써 보실 수 있어요.` };
-      return { plan: 'free', title: '기본 무료로 쓸 수 있어요', text: '자녀 1명 · 학원 2곳까지는 무료예요. 학원 사이 미도착 확인까지 그대로 쓰실 수 있어요.' };
+      if (many || kids) return { plan: 'premium', title: '🏰 철통 지킴이!가 맞아요', text: `${many ? '학원이 3곳 이상' : '자녀가 2명 이상'}이라 철통 지킴이(월 2,900원 예정)가 맞아요. 첫 달은 무료로 써 보실 수 있어요.` };
+      return { plan: 'free', title: '🛡️ 안전 지킴이!(무료)로 충분해요', text: '자녀 1명 · 학원 2곳까지는 무료예요. 학원 사이 미도착 확인까지 그대로 쓰실 수 있어요.' };
     }
     function calcSnapshot() {
       const p = planFor(state.profile);
       return {
         ...state.profile,
+        existing_app: state.existingApp || '',
         plan: p ? p.plan : '',
         academies_day: academyCount === 4 ? '4+' : String(academyCount),
         move_min: minutesInput.value,
@@ -1922,7 +1973,19 @@
         out.textContent = button.textContent;
         out.classList.remove('empty');
         state.calcSaved = false;
+        if (name === 'location_app') document.getElementById('existingAppCalc').classList.toggle('visible', button.dataset.value !== 'never');
       });
+    });
+    state.existingApp = '';
+    function syncExistingApp(value) {
+      state.existingApp = value.trim().slice(0, 80);
+      document.getElementById('existingAppInput').value = value;
+      document.getElementById('existingAppFormInput').value = value;
+    }
+    document.getElementById('existingAppInput').addEventListener('input', e => { syncExistingApp(e.target.value); state.calcSaved = false; });
+    document.getElementById('existingAppFormInput').addEventListener('input', e => syncExistingApp(e.target.value));
+    document.querySelectorAll('#followupForm input[name="location_app"]').forEach(input => {
+      input.addEventListener('change', () => document.getElementById('existingAppForm').classList.toggle('visible', input.value !== 'never'));
     });
     document.getElementById('calcSaveBtn').addEventListener('click', () => {
       const missing = PROFILE_KEYS.filter(key => !state.profile[key]);
@@ -1962,6 +2025,9 @@
           const answered = Boolean(state.profile[group.dataset.name]);
           group.style.display = answered ? 'none' : '';
         });
+        // 계산기에서 위치 앱 질문에 이미 답했다면 기존 앱 요금 칸도 다시 묻지 않는다.
+        const appAnswered = Boolean(state.profile.location_app);
+        document.getElementById('existingAppForm').style.display = appAnswered ? 'none' : '';
         setTimeout(() => followupForm.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
       });
     });
