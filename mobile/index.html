@@ -1988,7 +1988,7 @@
         ...answers
       };
       state.detail = detail;
-      record('response', detail); // 시트 '응답' 탭: 한 사람당 한 줄
+      record('detail', detail); // 예전·새 시트 코드 모두 저장 (새 코드: '응답' 탭 한 줄)
       document.getElementById('surveySubmit').style.display = 'none';
       contactPanel.classList.add('visible');
       contactPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
