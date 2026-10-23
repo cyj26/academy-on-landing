@@ -1903,7 +1903,6 @@
         return;
       }
       const answers = surveyAnswers(formData);
-      record('intent', { intent: state.intent, ...answers });
       const detail = {
         intent: state.intent,
         wish_price: formData.get('wish_price') || '',
@@ -1911,7 +1910,7 @@
         ...answers
       };
       state.detail = detail;
-      record('detail', detail);
+      record('response', detail); // 시트 '응답' 탭: 한 사람당 한 줄
       document.getElementById('surveySubmit').style.display = 'none';
       contactPanel.classList.add('visible');
       contactPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1942,7 +1941,6 @@
     });
 
     document.getElementById('skipContactBtn').addEventListener('click', () => {
-      record('contact_skipped', { intent: state.intent });
       finishSurvey();
     });
 
