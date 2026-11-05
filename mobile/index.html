@@ -1467,6 +1467,65 @@
     @media (prefers-reduced-motion: reduce) {
       .ac-flow li, .ac-sum { opacity: 1; transform: none; }
     }
+  
+    /* ===== 시안 2: 시인성 강화 ===== */
+    .ac-race { max-width: 860px; margin: 6px auto 34px; padding: 24px 26px 22px; border-radius: 26px; background: #fff; border: 1px solid var(--line); box-shadow: 0 20px 50px rgba(23,55,47,.08); }
+    .ac-race-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+    .ac-race-head b { font-size: 20px; letter-spacing: -.04em; }
+    .ac-race-head span { color: var(--ink-2); font-size: 13px; font-weight: 800; }
+    .ac-lane { display: grid; grid-template-columns: 170px 1fr 64px; align-items: center; gap: 14px; }
+    .ac-lane + .ac-lane { margin-top: 12px; }
+    .ac-lane-name { font-size: 14.5px; font-weight: 900; letter-spacing: -.03em; }
+    .ac-lane-calls { justify-self: end; font-size: 15px; font-weight: 950; }
+    .ac-lane.free .ac-lane-calls { color: #b23d46; }
+    .ac-lane.paid .ac-lane-calls { color: var(--green); }
+    .ac-bar { position: relative; height: 46px; border-radius: 14px; background: #f3efe4; overflow: hidden; }
+    .ac-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 14px; transition: width 2.6s cubic-bezier(.3,.7,.3,1); }
+    .ac-lane.free .ac-bar i { background: repeating-linear-gradient(135deg, #f15f68 0 12px, #f37a81 12px 24px); }
+    .ac-lane.paid .ac-bar i { background: var(--green); transition-duration: 1s; }
+    .ac-race.on .ac-lane.free .ac-bar i { width: 100%; }
+    .ac-race.on .ac-lane.paid .ac-bar i { width: 22%; }
+    .ac-bar em { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-style: normal; font-size: 15px; font-weight: 950; color: #fff; white-space: nowrap; opacity: 0; transition: opacity .4s ease 2.4s; text-shadow: 0 1px 2px rgba(0,0,0,.18); }
+    .ac-lane.paid .ac-bar em { left: calc(22% + 12px); color: var(--green); text-shadow: none; transition-delay: 1s; }
+    .ac-race.on .ac-bar em { opacity: 1; }
+
+    .ac-big { display: flex; align-items: baseline; gap: 10px; margin-top: 16px; }
+    .ac-big strong { font-size: 54px; line-height: 1; font-weight: 950; letter-spacing: -.06em; }
+    .ac-big span { font-size: 14px; font-weight: 800; line-height: 1.4; }
+    .ac-col.free .ac-big strong { color: #c9454e; }
+    .ac-col.free .ac-big span { color: #9c3a41; }
+    .ac-col.paid .ac-big strong { color: var(--yellow); }
+    .ac-col.paid .ac-big span { color: var(--mint); }
+    .ac-col h3 { margin-top: 10px; }
+
+    .ac-col.free { background: #fbf8f1; filter: saturate(.75); }
+    .ac-col.free .ac-flow li { background: #f0ebde; }
+    .ac-col.free h3 { color: #5f6f69; }
+    .ac-col.paid { outline: 4px solid rgba(255,216,95,.55); outline-offset: 0; }
+    .ac-flow b { font-size: 16.5px; }
+    .ac-flow time { font-size: 13px; }
+    .ac-vs { width: 52px; height: 52px; background: var(--ink); color: #fff; border: 0; font-size: 14px; }
+
+    .tl-zone.paid { background: var(--yellow); border-left-color: #17372f; }
+    .tl-zone.paid .tl-head { color: #17372f; }
+    .tl-zone.paid .tl-steps i { background: #17372f; color: var(--yellow); }
+    .tl-zone.paid .tl-steps em { color: rgba(23,55,47,.5); }
+    .tl-head { font-size: 13.5px; }
+
+    @media (max-width: 620px) {
+      .ac-race { padding: 18px 16px; margin-bottom: 24px; border-radius: 22px; }
+      .ac-race-head { flex-direction: column; gap: 2px; margin-bottom: 12px; }
+      .ac-race-head b { font-size: 18px; }
+      .ac-lane { grid-template-columns: 1fr auto; gap: 6px 10px; }
+      .ac-lane .ac-bar { grid-column: 1 / -1; grid-row: 2; height: 40px; }
+      .ac-lane-name { font-size: 13.5px; }
+      .ac-bar em { font-size: 13.5px; }
+      .ac-big strong { font-size: 44px; }
+      .tl-zone.paid { border-top-color: #17372f; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ac-bar i, .ac-bar em { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -1688,9 +1747,23 @@
           <h2>알림 다음의 몇 분,<br><span class="hl">확인 전화는 AI가 대신</span></h2>
           <p>미도착 알림을 받은 다음이 진짜 걱정이에요. 학원과 다른 보호자에게 하나씩 걸던 전화를, 버튼 한 번으로 AI에게 맡기세요.</p>
         </div>
+        <div class="ac-race" id="acRace" aria-label="아이 도착을 확인하기까지 걸린 시간 비교">
+          <div class="ac-race-head"><b>아이 도착을 확인하기까지</b><span>17:12 미도착 알림 이후</span></div>
+          <div class="ac-lane free">
+            <span class="ac-lane-name">🛡️ 무료 · 엄마가 직접</span>
+            <div class="ac-bar"><i></i><em>9분째 · 아직 모름</em></div>
+            <span class="ac-lane-calls">📞 3통</span>
+          </div>
+          <div class="ac-lane paid">
+            <span class="ac-lane-name">🏰 철통 지킴이 · AI</span>
+            <div class="ac-bar"><i></i><em>2분 · 도착 확인 ✓</em></div>
+            <span class="ac-lane-calls">📞 0통</span>
+          </div>
+        </div>
         <div class="ac-compare" id="acCompare">
           <article class="ac-col free">
             <span class="ac-tag">🛡️ 안전 지킴이 · 무료</span>
+            <div class="ac-big"><strong>9분+</strong><span>전화 3통, 그래도 아직 모름</span></div>
             <h3>알림은 와요.<br>확인은 엄마가 직접.</h3>
             <ol class="ac-flow">
               <li class="alert"><time>17:12</time><b>수학학원 미도착 알림</b><span>발표 중에 휴대폰이 울려요</span></li>
@@ -1703,6 +1776,7 @@
           <div class="ac-vs" aria-hidden="true">VS</div>
           <article class="ac-col paid">
             <span class="ac-tag">🏰 철통 지킴이 · 월 4,900원</span>
+            <div class="ac-big"><strong>2분</strong><span>엄마 통화 0통, 도착 확인</span></div>
             <h3>버튼 한 번,<br>확인은 AI가.</h3>
             <ol class="ac-flow">
               <li class="alert"><time>17:12</time><b>수학학원 미도착 알림</b><button class="ac-btn" type="button" tabindex="-1" aria-hidden="true">🤖 대신 확인해 줘</button></li>
@@ -2178,6 +2252,16 @@
         if (entries.some(e => e.isIntersecting)) { play(); io.disconnect(); }
       }, { threshold: .3 });
       io.observe(box);
+    })();
+  
+    // 확인까지 걸린 시간 막대
+    (function () {
+      const race = document.getElementById('acRace');
+      if (!race) return;
+      const io = new IntersectionObserver(entries => {
+        if (entries.some(e => e.isIntersecting)) { race.classList.add('on'); io.disconnect(); }
+      }, { threshold: .4 });
+      io.observe(race);
     })();
   </script>
 </body>
