@@ -1448,6 +1448,16 @@
     @media (prefers-reduced-motion: reduce) {
       .ac-bar i, .ac-bar em { transition: none; }
     }
+  
+    /* ===== 흐름 점검 반영 ===== */
+    .stop-plan { display: inline-block; margin-left: 4px; padding: 2px 8px; border-radius: 8px; background: rgba(129,223,189,.18); color: var(--mint); font-size: 11.5px; font-weight: 950; vertical-align: 3px; letter-spacing: 0; }
+    .stop-plan.paid { background: var(--yellow); color: #17372f; }
+    .stop-more { display: inline-block; margin-top: 10px; color: var(--yellow); font-size: 13.5px; font-weight: 900; }
+    /* ③ 모바일: 무료 카드는 결과만 (전화 과정은 앞 스토리에서 이미 봄) */
+    @media (max-width: 620px) {
+      .ac-col.free .ac-flow, .ac-col.free .ac-sum { display: none; }
+      .ac-col.free h3 { margin-bottom: 0; }
+    }
   </style>
 </head>
 <body>
@@ -1651,12 +1661,12 @@
         <div class="section-head">
           <span class="eyebrow">출결은 시작일 뿐이에요</span>
           <h2>가장 먼저 알리는 일,<br>AI로 한 걸음 더</h2>
-          <p>알림에서 시작해, 확인까지 대신하는 서비스로 자라 갑니다.</p>
+          <p>알림은 누구나 무료로, 확인 전화는 AI가 대신. 다음에는 일정 정리까지 맡아요.</p>
         </div>
         <div class="road">
-          <div class="stop now"><span class="stop-when">지금</span><div class="stop-card"><span class="ic">🛡️</span><h3>안심 알림</h3><p>학원 사이에 늦으면 알림, 학원차에서 내리면 예상 도착 시간까지 가장 먼저 알려 드려요.</p></div></div>
-          <div class="stop"><span class="stop-when">다음</span><div class="stop-card"><span class="ic">🤖</span><h3>AI 대신 확인</h3><p>아이가 안 오면 버튼 한 번. AI가 미리 지정한 학원·보호자에게 대신 연락해 확인하고 결과를 정리해 드려요.</p></div></div>
-          <div class="stop"><span class="stop-when">그다음</span><div class="stop-card"><span class="ic">✨</span><h3>AI 일정 이해</h3><p>학원 안내문 사진만 올리면 보강·휴원까지 시간표에 자동으로 등록해요.</p></div></div>
+          <div class="stop now"><span class="stop-when">지금</span><div class="stop-card"><span class="ic">🛡️</span><h3>안심 알림 <small class="stop-plan">무료</small></h3><p>학원 사이에 늦으면 알림, 학원차에서 내리면 예상 도착 시간까지 가장 먼저 알려 드려요.</p></div></div>
+          <div class="stop now"><span class="stop-when">지금</span><div class="stop-card"><span class="ic">🤖</span><h3>AI 대신 확인 <small class="stop-plan paid">철통 지킴이</small></h3><p>아이가 안 오면 버튼 한 번, 확인 전화는 AI가 대신해요.</p><a class="stop-more" href="#ai-check">아래에서 자세히 보기 ↓</a></div></div>
+          <div class="stop"><span class="stop-when">다음</span><div class="stop-card"><span class="ic">✨</span><h3>AI 일정 이해</h3><p>학원 안내문 사진만 올리면 보강·휴원까지 시간표에 자동으로 등록해요.</p></div></div>
         </div>
         <div class="pledge"><span>🤝</span>어떤 기능이 늘어나도, 아이의 위치는 수집하지 않습니다.</div>
       </div>
@@ -1666,8 +1676,8 @@
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">철통 지킴이의 핵심 · AI 대신 확인</span>
-          <h2>알림 다음의 몇 분,<br><span class="hl">확인 전화는 AI가 대신</span></h2>
-          <p>미도착 알림을 받은 다음이 진짜 걱정이에요. 학원과 다른 보호자에게 하나씩 걸던 전화를, 버튼 한 번으로 AI에게 맡기세요.</p>
+          <h2>그런데 정말 늦는 날이라면?<br><span class="hl">확인 전화는 AI가 대신</span></h2>
+          <p>대부분의 날은 알림 없이 지나가요. 하지만 미도착 알림이 온 날엔 그다음이 진짜 걱정이죠. 학원과 다른 보호자에게 하나씩 걸던 전화를, 버튼 한 번으로 AI에게 맡기세요.</p>
         </div>
         <div class="ac-race" id="acRace" aria-label="아이 도착을 확인하기까지 걸린 시간 비교">
           <div class="ac-race-head"><b>아이 도착을 확인하기까지</b><span>17:12 미도착 알림 이후</span></div>
@@ -1926,6 +1936,8 @@
           <details><summary>학원은 비용을 내나요?</summary><p>아니요. 학원은 무료입니다. 이미 다른 출결 앱을 쓰는 학원도 바꾸지 않고 그대로 이어집니다.</p></details>
           <details><summary>장비를 사야 하나요?</summary><p>아니요. 선생님·기사님과 아이가 쓰는 휴대폰으로 충분합니다. 휴대폰이 어려운 아이만 블루투스 키링을 선택해서 쓰면 됩니다.</p></details>
           <details><summary>휴대폰이 없는 저학년은요?</summary><p>가방에 키링을 달면 선생님·기사님 휴대폰이 알아봅니다. 아이가 따로 할 일은 없습니다.</p></details>
+          <details><summary>AI는 누구에게 연락하나요?</summary><p>부모님이 미리 정해 둔 학원과 보호자에게만, 정한 순서대로 연락합니다. 연락받는 분께도 아이가 다니는 다른 학원 정보는 알리지 않습니다.</p></details>
+          <details><summary>철통 지킴이를 쓰지 않아도 되나요?</summary><p>네. 출결 알림과 미도착 알림은 안전 지킴이로 계속 무료입니다. 확인 전화를 AI에게 맡기고 싶을 때만 철통 지킴이를 쓰시면 됩니다.</p></details>
           <details><summary>다른 학원에 다니는 것도 학원이 알게 되나요?</summary><p>아니요. 아이가 어느 학원에 다니는지는 다른 학원에 절대 공유하지 않습니다.</p></details>
         </div>
       </div>
